@@ -40,20 +40,7 @@ alpha[2] <- 1/gamma[1]^2
 
 
 mfa(data, sets, ncoms = NULL, center = TRUE, scale = TRUE){
-  ret <- NULL
-  ret$class = "mfa"
 
-  #select the rows given
-  #problem: accepts only character vectors
-  data <- data[,colnames(x)[sets]]
-  #problem: accepts only column numbers
-  data <- data[,sets]
-
-  #scale the data:
-  ret$data <- scale(x = data, center = center, scale = scale)
-
-  #check if this is correct: Just returns the eigenvalues of the dataframe
-  ret$ev <- eigen(data)$values
 
 
 
