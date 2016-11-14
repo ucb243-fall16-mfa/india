@@ -1,7 +1,0 @@
-Functions: concise, explanatory, verb-oriented. All lowercase, underscores. e.g. calc_mean
-Variables: start new words with capital letter. e.g. matrixRank <- 3
-Constants: All caps. E.g MU <- 3
-Comments: Roxygen #func.name
-                  # Description
-                  #@parameter
-                  ## any comment inside function (sparse use of them, above the codeblock)
