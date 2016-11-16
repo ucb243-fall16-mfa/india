@@ -17,7 +17,7 @@ file_read <- function(file_loc = 'STAT243/project/', file_name = 'wines.csv'){
     , df[, c('V1.8', 'V2.8', 'V3.8', 'V4.8', 'V15')]
     , df[, c('V1.9', 'V2.9', 'V3.9', 'V4.9')]
   )
-  attr(dl, 'wine_names') <- df[,'ID']
+  attr(dl, 'wine_names') <- as.character(df[,'ID'])
   dl
 }
 
@@ -149,10 +149,33 @@ get_alpha <- function(dl){
 alpha <- get_alpha(Y)
 K <- 10
 
-X_1 <- X[,1:6]
-Q_1 <- Q[1:6,]
+reshape_pfs <- function(x, dims){
+  # This isn't necessary if I can make partial_factor_scores cleaner
+  colnames(x) <- paste0('assessor_', 1:ncol(x))
+  x <- as.data.frame(x)
+  x$wine <- rep(wine_names, max(dims))
+  x$dim <- sort(rep(dims, length(wine_names)))
+  x <- reshape(x, idvar = c("wine", 'dim')
+                , varying = list(1:ncol(x))
+                , v.names = "score"
+                , direction = "long")
+  row.names(x) <- NULL
+  x <- reshape(x, v.names = 'score', idvar = c('wine', 'time')
+                , timevar = 'dim', direction = 'wide')
+  names(x) <- c('wine', 'assessor', paste0('dim_', dims))
+  x
+}
 
-10 * 0.241 * X_1 %*% Q_1
+partial_factor_scores <- function(K, alpha, X, Q, dims){
+  dm <- sapply(1:length(alpha), function(k){
+    res <- K * alpha[k] * X[,SETS[[k]]] %*% Q[SETS[[k]],]
+    res[, dims]
+  })
+  
+  reshape_pfs(dm, dims)
+}
+
+partialFactorScores <- partial_factor_scores(10, alpha, X, Q, 1:2)
 
 # CHECK: MATRIX OF LOADINGS (a.k.a. factor loadings).
 matrix_loadings <- function(A, M, X){
