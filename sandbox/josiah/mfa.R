@@ -28,11 +28,10 @@ scale_mfa <- function(x){
   scale(x) / sqrt(nrow(x) - 1)
 }
 
-# METHOD 1: Division of PCA by singular value -------------------------
+Y <- file_read()
+wine_names <- attr(Y, 'wine_names')
 
-data <- file_read()
-wine_names <- attr(data, 'wine_names')
-Y <- data
+# METHOD 1: Division of PCA by singular value -------------------------
 
 k_tables <- lapply(Y, function(x) {
   
@@ -73,7 +72,7 @@ col_weights <- function(dl){
   diag(
     unlist(
       lapply(dl, function(x) {
-        # Center ans scale K tables of J[k] variables collected on the 
+        # Center and scale K tables of J[k] variables collected on the 
         # same observations
         X <- scale(x) / sqrt(nrow(x) - 1)
         
@@ -100,15 +99,131 @@ A <- col_weights(Y)
 # Observation Weights
 M <- diag(rep(1 / NROW(Y[[1]]), NROW(Y[[1]])))
 
-# Compute the SVD of the weighted data
-X_hat <- sqrt(M) %*% X %*% sqrt(A)
-svd_2 <- svd(X_hat)
-U_hat <- sqrt(solve(M)) %*% svd_2$u
-d_hat <- svd_2$d
-V_hat <- sqrt(solve(A)) %*% svd_2$v
+# CHECK: VECTOR CONTAINING THE EIGENVALUES
+eigenvalues <- function(A, M, X){
+  X_hat <- sqrt(M) %*% X %*% sqrt(A)
+  svd_2 <- svd(X_hat)
+  U_hat <- sqrt(solve(M)) %*% svd_2$u
+  svd_2$d^2
+}
 
-# Compute and visualize factor scores
-F_scores_2 <- U_hat %*% diag(d_hat)
-F_scores_2[, c(1, 2)]
+eigenvalues(A = A, M = M, X = X)
 
-plot_f_scores(F_scores_2, 'Method #2: GSVD', wine_names)
+# CHECK: MATRIX OF COMMON FACTOR SCORES
+factor_scores <- function(A, M, X){
+  X_hat <- sqrt(M) %*% X %*% sqrt(A)
+  svd_2 <- svd(X_hat)
+  U_hat <- sqrt(solve(M)) %*% svd_2$u
+  d_hat <- svd_2$d
+  V_hat <- sqrt(solve(A)) %*% svd_2$v
+  factor_scores <- U_hat %*% diag(d_hat)
+  factor_scores[, c(1, 2)]
+}
+
+factorScores <- factor_scores(A = A, M = M, X = X)
+plot_f_scores(factorScores, 'Method #2: GSVD', wine_names)
+
+# IN PROGRESS: MATRIX OF PARTIAL FACTORS SCORES
+get_alpha <- function(dl){
+  unlist(
+    lapply(dl, function(x) {
+      # Center and scale K tables of J[k] variables collected on the 
+      # same observations
+      X <- scale(x) / sqrt(nrow(x) - 1)
+      
+      # Compute generalized PCA on each of the K tables 
+      # (where d is the first singular value of each table)
+      SVD <- svd(X)
+      d <- SVD$d[1]
+      
+      # Weights for each table, one for each column
+      1 / d^2
+      }
+    )
+  )
+}
+
+alpha <- get_alpha(Y)
+K <- 10
+
+X_1 <- X[,1:6]
+Q_1 <- Q[1:6,]
+
+10 * 0.241 * X_1 %*% Q_1
+
+# CHECK: MATRIX OF LOADINGS (a.k.a. factor loadings).
+matrix_loadings <- function(A, M, X){
+  X_hat <- sqrt(M) %*% X %*% sqrt(A)
+  svd_2 <- svd(X_hat)
+  V_hat <- sqrt(solve(A)) %*% svd_2$v
+  V_hat
+}
+
+Q <- matrix_loadings(A = A, M = M, X = X)
+dim(Q)
+print(Q[1:5, 1:2], digits = 3)
+
+
+# summaries of eigenvalues  -----------------------------------------------
+summary_eigenvalues <- function(evs){
+  evs_sum <- matrix(NA, ncol = length(evs), nrow = 5)
+  colnames(evs_sum) <- 1:length(evs)
+  rownames(evs_sum) <- c('Singular Value', 'Eigenvalue', '  cumulative'
+                         , '% Inertia', '  cumulative')
+  
+  evs_sum[1, ] <- sqrt(evs)
+  evs_sum[2, ] <- evs
+  evs_sum[3, ] <- cumsum(evs)
+  evs_sum[4, ] <- 100 * evs_sum[2,] / sum(evs_sum[2,])
+  evs_sum[5, ] <- cumsum(evs_sum[4,])
+  print(evs_sum, digits = 3)
+}
+
+evs <- eigenvalues(A = A, M = M, X = X)
+summary_eigenvalues(evs = evs)
+
+# contributions -----------------------------------------------------------
+# i: observation (e.g., 12)
+# j: variable (e.g., 53)
+# l: extracted dimension (e.g., 11)
+# k: table
+
+# j x 1 vector of weights
+a <- diag(A)
+
+ctr_i_l <- function(f, m = 1/12, dims = 1:2){
+  # contribution of observation to dimension
+  f <- f[,dims]
+  m * f^2 / sum(m * f^2)
+}
+
+ctr_i_l(factorScores)
+
+ctr_j_l <- function(a, loading, j_range = 1:53, l_range = 1:2){
+  # contribution of variable to dimension
+  # product of alpha weight[j] and loading[j,l]^2
+  sapply(l_range, function(l){
+    sapply(j_range, function(j){
+      a[j] * loading[j, l]^2 * 1000
+    })
+  })
+}
+
+ctr_j_l(a, Q)
+
+ctr_k_l <- function(alpha, loading, sets, dims = 1:2){
+  # contribution of table to dimension
+  # defined as the sum of the contribution of each variable from the table
+  sapply(dims, function(l){
+    sapply(sets, function(k){
+      sum(alpha[k] * loading[k, l]^2)
+    })
+  })
+}
+
+ctr_k_l(a, Q, list(1:6, 7:12, 13:18, 19:23, 24:29, 30:34
+                   , 35:38, 39:44 , 45:49, 50:53))
+
+# RV coefficient ----------------------------------------------------------
+
+
