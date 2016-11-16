@@ -1,3 +1,6 @@
+SETS <- list(1:6, 7:12, 13:18, 19:23, 24:29, 30:34
+             , 35:38, 39:44 , 45:49, 50:53)
+
 # Functions ---------------------------------------------------------------
 
 file_read <- function(file_loc = 'STAT243/project/', file_name = 'wines.csv'){
@@ -99,7 +102,7 @@ A <- col_weights(Y)
 # Observation Weights
 M <- diag(rep(1 / NROW(Y[[1]]), NROW(Y[[1]])))
 
-# CHECK: VECTOR CONTAINING THE EIGENVALUES
+# DONE: VECTOR CONTAINING THE EIGENVALUES
 eigenvalues <- function(A, M, X){
   X_hat <- sqrt(M) %*% X %*% sqrt(A)
   svd_2 <- svd(X_hat)
@@ -109,7 +112,7 @@ eigenvalues <- function(A, M, X){
 
 eigenvalues(A = A, M = M, X = X)
 
-# CHECK: MATRIX OF COMMON FACTOR SCORES
+# DONE: MATRIX OF COMMON FACTOR SCORES
 factor_scores <- function(A, M, X){
   X_hat <- sqrt(M) %*% X %*% sqrt(A)
   svd_2 <- svd(X_hat)
@@ -221,9 +224,29 @@ ctr_k_l <- function(alpha, loading, sets, dims = 1:2){
   })
 }
 
-ctr_k_l(a, Q, list(1:6, 7:12, 13:18, 19:23, 24:29, 30:34
-                   , 35:38, 39:44 , 45:49, 50:53))
+ctr_k_l(a, Q, SETS)
 
 # RV coefficient ----------------------------------------------------------
+tr <- function(m){
+  if(!is.matrix(m) | nrow(m) != ncol(m)) stop('m must be a square matrix')
+  sum(diag(m %*% t(m)))
+}
 
+RV <- function(m1, m2){
+  num <- tr(m1 %*% t(m1) %*% m2 %*% t(m2))
+  denom1 <- tr(m1 %*% t(m1) %*% m1 %*% t(m1))
+  denom2 <- tr(m2 %*% t(m2) %*% m2 %*% t(m2))
+  num / sqrt(denom1 * denom2)
+}
 
+RV(X[,1:6], X[,7:12])
+
+RV_table <- function(x, sets){
+  sapply(sets, function(i){
+    sapply(sets, function(j){
+      RV(x[,i], x[,j])
+    })
+  })
+}
+
+RV_table(X, SETS)
