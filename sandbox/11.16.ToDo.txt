@@ -1,0 +1,35 @@
+Ideas for the meeting tomorrow, 11/16:
+Maybe we should just decide on 1 function that for sure returns the right X (not the X Tilde!) and split up the work of writing work intensive functions
+
+functions needed:
+mfa(). Should return an object of class mfa with
+
+@param eigenvalues. Use getEigenvalues / summary.mfa(eigenvalues)
+
+@param factorScores. Use getFactorScores
+
+@oaram partialFactorScores. Use getpartialFactorScores
+ 
+@param matrix Loadings. Use getMatrixLoadings
+
+Should maybe also contain 
+@param X. The matrix on which everything is based, and 
+@param alpha. Eventually even the svd?
+
+  
+summaryEigenvalues.mfa(MFA) (Up to here everything should be implemented by one person - did someone already define a function that does that? 
+I somehow fail to return the summary of the eigenvalues)
+
+getContributionObDim()
+
+getContribtutionVarDim()
+
+getContributionTableDim()
+
+RV(table1, table2)
+
+RV_table(dataset, sets)
+
+getLgCoefficient(table1, table2)
+
+bootstrap
