@@ -11,7 +11,7 @@ plot <- function(x, ...) UseMethod('plot')
 plot.mfa <- function(x, color = NULL){
   plot_compromise(x, color)
   plot_partial_factor(x, color)
-  # plot_variable_loadings(x, color)
+  plot_variable_loadings(x)
 }
 
 # plot(mfa1, color = substr(wine$ID, 1, 2))

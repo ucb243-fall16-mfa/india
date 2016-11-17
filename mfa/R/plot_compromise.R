@@ -11,7 +11,8 @@ plot_compromise <- function(x, ...) UseMethod('plot_compromise')
 
 plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
   
-  par(mfrow = c(1, 1))
+  par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
+
   if(!is.null(color)){
     
     # Create color scheme for plotting
@@ -28,7 +29,6 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
          , x$factorScores[,2]
          , pch = 16
          , cex = 2
-         # , main = title
          , xlab = 'First Factor'
          , ylab = 'Second Factor'
          , col = color_scheme)
@@ -42,7 +42,6 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
   } else {
     plot(x$factorScores[,1]
          , x$factorScores[,2]
-         # , main = title
          , xlab = 'First Factor'
          , ylab = 'Second Factor')
   }
@@ -57,4 +56,4 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
   mtext(title, outer = TRUE, cex = 1.5)
 }
 
-# plot_compromise(mfa1, substr(wine$ID, 1, 2))
+plot_compromise(mfa1, substr(wine$ID, 1, 2))
