@@ -10,7 +10,7 @@ plot <- function(x, ...) UseMethod('plot')
 
 plot.mfa <- function(x, color = NULL){
   plot_compromise(x, color)
-  # plot_partial_factor(x, color)
+  plot_partial_factor(x, color)
   # plot_variable_loadings(x, color)
 }
 
