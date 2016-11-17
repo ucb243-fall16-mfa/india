@@ -126,6 +126,19 @@ factor_scores <- function(A, M, X){
 factorScores <- factor_scores(A = A, M = M, X = X)
 plot_f_scores(factorScores, 'Method #2: GSVD', wine_names)
 
+# CHECK: MATRIX OF LOADINGS (a.k.a. factor loadings).
+matrix_loadings <- function(A, M, X){
+  X_hat <- sqrt(M) %*% X %*% sqrt(A)
+  svd_2 <- svd(X_hat)
+  V_hat <- sqrt(solve(A)) %*% svd_2$v
+  V_hat
+}
+
+Q <- matrix_loadings(A = A, M = M, X = X)
+dim(Q)
+print(Q[1:5, 1:2], digits = 3)
+
+
 # IN PROGRESS: MATRIX OF PARTIAL FACTORS SCORES
 get_alpha <- function(dl){
   unlist(
@@ -171,24 +184,11 @@ partial_factor_scores <- function(K, alpha, X, Q, dims){
     res <- K * alpha[k] * X[,SETS[[k]]] %*% Q[SETS[[k]],]
     res[, dims]
   })
-  
-  reshape_pfs(dm, dims)
+  dm
+  # reshape_pfs(dm, dims)
 }
 
 partialFactorScores <- partial_factor_scores(10, alpha, X, Q, 1:2)
-
-# CHECK: MATRIX OF LOADINGS (a.k.a. factor loadings).
-matrix_loadings <- function(A, M, X){
-  X_hat <- sqrt(M) %*% X %*% sqrt(A)
-  svd_2 <- svd(X_hat)
-  V_hat <- sqrt(solve(A)) %*% svd_2$v
-  V_hat
-}
-
-Q <- matrix_loadings(A = A, M = M, X = X)
-dim(Q)
-print(Q[1:5, 1:2], digits = 3)
-
 
 # summaries of eigenvalues  -----------------------------------------------
 summary_eigenvalues <- function(evs){
