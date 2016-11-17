@@ -8,7 +8,7 @@
   * returns X 
   * returns alpha
 
-### GENERIC METHODS
+### Generic Methods
 
 * print.mfa Sunny
 * plot.mfa Josiah
@@ -16,7 +16,7 @@
 * plot_partial_factor Josiah
 * plot_variable_loadings Josiah
 
-## RELATED METHODS
+### Related Methods
 
 * summary_eigenvalues.mfa Yoni
 * get_contribution_obs_dim Josiah
@@ -25,7 +25,7 @@
 * RV(table1, table2) Dario
 * RV_table(dataset, sets) Dario
 
-### OTHER 
+### Other 
 
 * Shiny App
 * Unit Testing
@@ -33,7 +33,7 @@
 
 
 
-### BONUS
+### Bonus
 
 * get_Lg_coefficient(table1, table2)
 * bootstrap
