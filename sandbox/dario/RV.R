@@ -13,10 +13,16 @@
 #' @export
 
 RV = function(table1, table2){
-  numerator <- trace((table1 %*% t(table1)) * (table2 %*% t(table2)))
-  denom1 <- trace((table1 %*% t(table1)) * (table1 %*% t(table1)))
-  denom2 <- trace((table2 %*% t(table2)) * (table2 %*% t(table2)))
+  table1 <- as.matrix(table1) # Might be unnecessary
+  table2 <- as.matrix(table2)
+  numerator <- tr((table1 %*% t(table1)) %*% (table2 %*% t(table2))) # Need to check online
+  denom1 <- tr((table1 %*% t(table1)) %*% (table1 %*% t(table1)))
+  denom2 <- tr((table2 %*% t(table2)) %*% (table2 %*% t(table2)))
 
   res <- numerator/sqrt(denom1 * denom2)
   return(res)
+}
+
+tr = function(x){
+  return(sum(diag(x)))
 }
