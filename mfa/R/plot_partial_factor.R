@@ -8,6 +8,8 @@
 #' @return a plot with the projection of each observation onto the first two
 #' extracted components
 
+# Include sets as an argument
+
 plot_partial_factor <- function(x, ...) UseMethod('plot_partial_factor')
 
 plot_partial_factor.mfa <- function(x, color = NULL

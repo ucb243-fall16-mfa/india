@@ -7,6 +7,8 @@
 #' @return a plot with the projection of each observation onto the first two
 #' extracted components
 
+# Compromise isn't showing title and margins are off for color only
+
 plot_compromise <- function(x, ...) UseMethod('plot_compromise')
 
 plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
@@ -56,4 +58,4 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
   mtext(title, outer = TRUE, cex = 1.5)
 }
 
-plot_compromise(mfa1, substr(wine$ID, 1, 2))
+# plot_compromise(mfa1, substr(wine$ID, 1, 2))
