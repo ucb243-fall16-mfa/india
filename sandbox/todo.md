@@ -27,9 +27,10 @@
 
 ### Other 
 
-* Shiny App
-* Unit Testing
-* Vignettes
+* Shiny App (Yanli)
+* Unit Testing (Yoni)
+* Vignettes (Dario)
+* HTML Slides (Josiah)
 
 
 
