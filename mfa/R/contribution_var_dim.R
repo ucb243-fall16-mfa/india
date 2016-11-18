@@ -1,6 +1,7 @@
 #' contribution_var_dim
 #'
 #' Calculate the contributions of a variable to a dimension
+#' All contributions are scaled by multiplying by 1000
 #' @param x - the mfa object
 #' @param l_range - how many dimensions should be returned?
 #' @return a matrix with the contributions of a variable to a dimension
