@@ -8,34 +8,29 @@
 #' @param weights -
 #' @param center - logical value: should the data should be centered?
 #' @param scale - logical value: should the data be scaled?
-#' @param ids -
+#' @param ids - character vector of row names
 #' @return an mfa object contaning the pieces of the resulting analysis
 mfa <- function(data, sets, ncomps = NULL, weights = NULL,
                 center = TRUE, scale = TRUE, ids = NULL){
 
+    ## check that all the inputs are acceptable:
+    check_data(data, sets, ncomps, weights, ids)
+    check_center(center)
+    check_scale(scale)
+    
     ## keep track of the number of blocks
     nGroups <- length(sets)
     
     ## extract the datasets
-    Xk <- try(lapply(sets, function(g){
+    Xk <- lapply(sets, function(g){
         as.matrix(scale(data[, g], center = center,
                         scale = scale) / sqrt(length(IDs) - 1))
-    }))
-    if(identical(class(Xk), "try-error")){
-        stop(paste0("please check that arguments",
-                    " scale and center are logical,",
-                    " sets is a list of vectors containing",
-                    " variable names or positions,",
-                    " and that data is a numeric data.frame",
-                    " or matrix."))
-    }
+    })
 
     ## create mass matrix
     if(is.null(weights)){
         weights <- rep(1/nGroups, nGroups)
-    } else if(sum(weights) != 1){
-        stop("weights must add to 1")
-    }
+    } 
     M <- diag(weights)
     
     ## calculate vector of weights
