@@ -30,5 +30,8 @@ check_data <- function(data, sets, ncomps, weights, ids){
     if(!is.null(ids) & length(ids) != nrows(data)){
         stop("there must be as many ids as rows of data")
     }
+    if(!is.null(ids) & length(ids) != length(unique(ids))){
+        stop("ids must be unique")
+    }
     TRUE
 }
