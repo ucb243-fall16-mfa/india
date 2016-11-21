@@ -24,7 +24,7 @@ mfa <- function(data, sets, ncomps = NULL, weights = NULL,
     ## extract the datasets
     Xk <- lapply(sets, function(g){
         as.matrix(scale(data[, g], center = center,
-                        scale = scale) / sqrt(length(IDs) - 1))
+                        scale = scale) / sqrt(nrow(data) - 1))
     })
 
     ## create mass matrix
