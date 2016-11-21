@@ -1,2 +1,15 @@
-# stat243FinalProject
-Stat 243 Final Project
+```
+Package: mfa
+Title: Perform multiple factor analysis
+Version: 0.1
+Authors@R: c(
+    person("Dario", "Cantore", email = "cantore_dario@berkeley.edu", role = "cre"),
+    person("Josiah", "Davis", email = "josiahdavis@berkeley.edu", role = "aut"),
+    person("Yanli", "Fan", email = "yanlifan@berkeley.edu", role = "aut"),
+    person("Yoni", "Ackerman", email = "yoni@berkeley.edu", role = "aut")
+    )
+Description: Conducts multiple factor analysis, an extension of principal components analysis for analyzing situations with multiple measurements on a set of observations.
+Depends: R (>= 3.1.0)
+License: TBD
+LazyData: true
+```
