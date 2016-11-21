@@ -4,7 +4,7 @@
 #' @param sets - list of numeric/character vectors
 #' @return boolean - did the test pass?
 check_sets <- function(sets){
-    if(!all(lapply(sets, is.numeric)) | !all(lapply(sets, is.character)){
+    if(!all(lapply(sets, is.numeric)) | !all(lapply(sets, is.character))){
         stop(paste0("sets must either be a list containing numeric",
                     " or character vectors"))
     }
