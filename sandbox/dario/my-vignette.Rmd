@@ -24,7 +24,7 @@ For further information concerning centering and scaling refer to the help of th
 The function returns an mfa object with attributes P, Q $\lambda$, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues $\lambda$, which are the singular values squared, $\Delta^2$. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8 (how to cite the paper?).
 
 #Data Wine
-The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project
+The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project and will be used throughout the Vignette to provide examples.
 
 
 
@@ -46,12 +46,17 @@ mfa1
 #summary_eigenvalues.mfa Function
 The summary function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the /% of inertia explained, and the cumulative /% of inertia explained. 
 ```{r}
-summary_eigenvalues(mfa)
+summary_eigenvalues(mfa1)
 ```
 
 
 #plot.mfa Function
 The plot function for mfa objects automatically plots the Compromise, Partial Factor Scores and Variable Loadings, using the plot_compromise, plot_partial_factor and plot_variable_loadings functions. It can take a color argument as input, which should be a list of vectors. Each element of the vector denotes observations (e.g. rows) of the data table which will then be displayed in the same color.
+
+```{r}
+plot(mfa1)
+```
+
 
 #plot_compromise Function
 The plot_compromise Function for mfa objects plots the factor scores (factor scores and compromise are used interchangeably here) of the object.
@@ -71,7 +76,7 @@ plot(mfa1)
 #Related Methods and Functions
 
 #Contributions of an Observation to a Dimension
-The ctr_o_d function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input 
+The ctr_o_d function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an
 #finish this
 
 $ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}$, where $\lambda_l$ is the eigenvalue of dimension $l$, $m_i$ is the mass of the $i$-th dimension and $f_{i,l}$ is the factor score for the $i$-th observation for the $l$-th dimension.
@@ -93,9 +98,18 @@ The RV function analyzes the structure between two tables. It can be seen as the
 Given two tables as an input it returns the scalar RV.
 RV = $\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\sqrt(trace(table1 \ table1^T) * (table1 \ table1^T) * trace((table2 \ table2^T) * (table2 \ table2^T)))}$ where the Root is taken with respect to the entire denominator and $*$ as well as " " denote the normal Matrix Multiplication.
 
+```{r}
+RV(data2[,SETS[[1]]], data2[,SETS[[2]]])
+```
+
+
 #RV_Table Function
 The RV Table function returns a matrix of RV Coefficients. 
 The RV Table function takes as input one big dataset and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_i_j$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+
+```{r}
+RV_table(data2, SETS)
+```
 
 
 
