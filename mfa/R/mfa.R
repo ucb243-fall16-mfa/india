@@ -13,6 +13,9 @@
 mfa <- function(data, sets, ncomps = NULL, weights = NULL,
                 center = TRUE, scale = TRUE, ids = NULL){
 
+    ## todo: fix_sets and add as attr
+    ## check project requirements for wednesday
+    
     ## check that all the inputs are acceptable:
     check_data(data, sets, ncomps, weights, ids)
     check_center(center)
@@ -20,7 +23,7 @@ mfa <- function(data, sets, ncomps = NULL, weights = NULL,
     
     ## keep track of the number of blocks
     nGroups <- length(sets)
-    
+
     ## extract the datasets
     Xk <- lapply(sets, function(g){
         as.matrix(scale(data[, g], center = center,
@@ -29,7 +32,7 @@ mfa <- function(data, sets, ncomps = NULL, weights = NULL,
 
     ## create mass matrix
     if(is.null(weights)){
-        weights <- rep(1/nGroups, nGroups)
+        weights <- rep(1/dim(data)[1], dim(data)[1])
     } 
     M <- diag(weights)
     

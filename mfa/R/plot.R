@@ -16,3 +16,4 @@ plot.mfa <- function(x, color = NULL){
 
 # plot(mfa1, color = substr(wine$ID, 1, 2))
 # plot(mfa1)
+
