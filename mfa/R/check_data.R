@@ -14,20 +14,21 @@ check_data <- function(data, sets, ncomps, weights, ids){
         stop("data must be numeric")
     }
     check_sets(sets)
+    setContents <- unlist(sets)
     if(!all(setContents %in% colnames(data) | setContents %in% 1:ncol(data))){
         stop(paste0("all vectors in sets must contain either",
                     " column positions or column names of the data"))
     }
     check_ncomps(ncomps)
-    if(ncomps > nrows(data)){
+    if(ncomps > nrow(data)){
         stop("cannot request more components than rows in data")
     }
     check_weights(weights)
-    if(!is.null(weights) & length(weights) != nrows(data)){
+    if(!is.null(weights) & length(weights) != nrow(data)){
         stop("there must be as many weights as rows of data")
     }
     check_ids(ids)
-    if(!is.null(ids) & length(ids) != nrows(data)){
+    if(!is.null(ids) & length(ids) != nrow(data)){
         stop("there must be as many ids as rows of data")
     }
     if(!is.null(ids) & length(ids) != length(unique(ids))){
