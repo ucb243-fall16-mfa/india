@@ -72,5 +72,6 @@ mfa <- function(data, sets, ncomps = NULL, weights = NULL,
     attr(ret, "ncomps") <- ncomps
     attr(ret, "ids") <- ids
     attr(ret, "sets") <- sets
+    attr(ret, "colWeights") <- a
     ret
 }

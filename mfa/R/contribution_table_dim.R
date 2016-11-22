@@ -7,22 +7,15 @@
 
 contribution_table_dim <- function(x, ...) UseMethod('contribution_table_dim')
 
-contribution_table_dim.mfa <- function(x, l_range = 1:2){
-  
-  if(is.null(x$sets) | !is.numeric(x$sets[[1]])){
-    stop('mfa object must include numeric sets')
-  }
-  
-  if(is.null(x$a)){
-    stop('mfa object must include column weights')    
-  }
-  
-  sapply(l_range, function(l){
-    sapply(x$sets, function(k){
-      sum(x$a[k - 1] * x$loadings[k - 1, l]^2)
+contribution_table_dim.mfa <- function(mfa, l_range = 2){
+    check_contribution_params(mfa, l_range)
+    sets <- attributes(mfa)$sets
+    a <- attributes(mfa)$colWeights
+    sapply(1:l_range, function(l){
+        sapply(sets, function(k){
+            sum(a[k - 1] * mfa$Q[k - 1, l]^2)
+        })
     })
-  })
-  
 }
 
 # contribution_table_dim(mfa1)
