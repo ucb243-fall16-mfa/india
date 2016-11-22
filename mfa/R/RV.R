@@ -15,6 +15,13 @@
 RV = function(table1, table2){
   table1 <- as.matrix(table1) # Might be unnecessary
   table2 <- as.matrix(table2)
+  
+  #check if input consists of only numerical values
+  if(!is.numeric(table1) | !is.numeric(table2)){
+    stop("Please make sure table1 and table2 are numeric matrices or a data.frame that consists
+          only of numerical values")
+  }
+  
   numerator <- tr((table1 %*% t(table1)) %*% (table2 %*% t(table2))) # Need to check online
   denom1 <- tr((table1 %*% t(table1)) %*% (table1 %*% t(table1)))
   denom2 <- tr((table2 %*% t(table2)) %*% (table2 %*% t(table2)))
