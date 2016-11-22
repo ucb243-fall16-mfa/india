@@ -10,7 +10,7 @@ check_data <- function(data, sets, ncomps, weights, ids){
     if(!is.data.frame(data) | is.matrix(data)){
         stop("data must be a data.frame or a matrix")
     }
-    if(any(!apply(data, 2, is.numeric))){
+    if(any(!apply(data[,unlist(sets)], 2, is.numeric))){
         stop("data must be numeric")
     }
     check_sets(sets)
