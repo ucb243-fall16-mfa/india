@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 check_contribution_params <- function(mfa, l_range){
-    if(class(mfa)[1] != "mfa"){
+    if(!("mfa" %in% class(mfa))){
         stop("mfa must be an object of class mfa")
     }
     
