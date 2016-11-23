@@ -11,7 +11,7 @@ check_contribution_params <- function(mfa, l_range){
     }
     
     if(is.null(attributes(mfa)$sets) |
-       !all(is.numeric(attributes(mfa)$sets)){
+       !all(is.numeric(attributes(mfa)$sets))){
         stop('mfa object must include numeric sets')
     }
   
@@ -19,7 +19,7 @@ check_contribution_params <- function(mfa, l_range){
         stop('mfa object must include column weights')    
     }
 
-    if(l_range %% 1 != 0)){
+    if(l_range %% 1 != 0){
         stop("l_range must be an integer")
     }
 
