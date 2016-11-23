@@ -6,12 +6,12 @@
 #' @export
 #' @examples
 check_contribution_params <- function(mfa, l_range){
-    if(class(mfa) != "mfa"){
+    if(class(mfa)[1] != "mfa"){
         stop("mfa must be an object of class mfa")
     }
     
     if(is.null(attributes(mfa)$sets) |
-       !all(is.numeric(attributes(mfa)$sets))){
+       !all(sapply(attributes(mfa)$sets, is.numeric))){
         stop('mfa object must include numeric sets')
     }
   
