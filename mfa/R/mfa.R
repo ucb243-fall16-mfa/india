@@ -13,7 +13,7 @@
 mfa <- function(data, sets, ncomps = NULL, weights = NULL,
                 center = TRUE, scale = TRUE, ids = NULL){
 
-    ## todo: fix_sets and add as attr
+    ## todo: fix_sets and add as attr (done - Josiah)
     ## check project requirements for wednesday
     
     ## check that all the inputs are acceptable:
@@ -53,10 +53,13 @@ mfa <- function(data, sets, ncomps = NULL, weights = NULL,
     SVD <- svd(S)
     P <- sqrt(solve(M)) %*% SVD$u
     delta <- sqrt(diag(solve(P) %*% S %*% solve(t(P))))
-
+    
+    ## Put sets variable into standard format
+    sets <- format_sets(sets, nGroups)
+    
     ## calculate common factor score and loading matrices
     Q <- t(X) %*% M %*% P %*% solve(diag(delta))
-    F <- S %*% M %*% P %*% solve(diag(delta))
+    Fs <- S %*% M %*% P %*% solve(diag(delta))
 
     ## calculate partial factor score matrices
     Fk <- lapply(1:nGroups, function(i){
@@ -65,7 +68,7 @@ mfa <- function(data, sets, ncomps = NULL, weights = NULL,
 
     ## collect results and return list with class "mfa"
     ret <- list(lambda = delta^2,
-                commonFactorScores = F,
+                commonFactorScores = Fs,
                 partialFactorScores = Fk,
                 Q = Q, P = P)
     class(ret) <- c("mfa", class(ret))
