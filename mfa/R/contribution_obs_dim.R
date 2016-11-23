@@ -8,8 +8,9 @@
 contribution_obs_dim <- function(x, ...) UseMethod('contribution_obs_dim')
 
 contribution_obs_dim.mfa <- function(x, l_range = 1:2){
-  m <- 1/length(x$varNames)
-  m * x$factorScores[, l_range]^2 / sum(m * x$factorScores[, l_range]^2)
+  # Todo: Pass Weights
+  m <- 1/length(attributes(x)$colWeights)
+  m * x$commonFactorScores[, l_range]^2 / sum(m * x$commonFactorScores[, l_range]^2)
 }
 
 # contribution_obs_dim(mfa1)

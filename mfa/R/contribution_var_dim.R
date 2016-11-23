@@ -9,10 +9,10 @@
 contribution_var_dim <- function(x, ...) UseMethod('contribution_var_dim')
 
 contribution_var_dim.mfa <- function(x, l_range = 1:2){
-  j_range <- 1:nrow(x$loadings)
+  j_range <- 1:nrow(x$Q)
   sapply(l_range, function(l){
     sapply(j_range, function(j){
-      x$a[j] * x$loadings[j, l]^2 * 1000
+      attributes(x)$colWeights[j] * x$Q[j, l]^2 * 1000
     })
   })
 }

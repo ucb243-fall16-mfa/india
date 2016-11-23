@@ -13,7 +13,7 @@ contribution_table_dim.mfa <- function(mfa, l_range = 2){
     a <- attributes(mfa)$colWeights
     sapply(1:l_range, function(l){
         sapply(sets, function(k){
-            sum(a[k - 1] * mfa$Q[k - 1, l]^2)
+            sum(a[k] * mfa$Q[k, l]^2)
         })
     })
 }
