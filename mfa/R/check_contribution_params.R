@@ -1,14 +1,11 @@
-#' Function Name
+#' check_contribution_params
 #'
-#' Function Description
-#' @param
-#' @keywords
-#' @export
-#' @examples
+#' make sure the inputs to contribution_table_dim are
+#' viable
+#' @param mfa - a valid mfa object
+#' @param l_range - numeric integer
 check_contribution_params <- function(mfa, l_range){
-    if(!("mfa" %in% class(mfa))){
-        stop("mfa must be an object of class mfa")
-    }
+    check_mfa(mfa)
     
     if(is.null(attributes(mfa)$sets) |
        !all(sapply(attributes(mfa)$sets, is.numeric))){

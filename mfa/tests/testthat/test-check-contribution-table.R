@@ -2,7 +2,6 @@ context("check contribution_table_dim function")
 
 load("../testMFAobj.rda")
 
-## todo
 test_that("contribution tables operate properly", {
     ## check that params work properly
     expect_true(check_contribution_params(MFA, 2))

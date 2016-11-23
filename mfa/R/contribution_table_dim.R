@@ -17,5 +17,3 @@ contribution_table_dim.mfa <- function(mfa, l_range = 2){
         })
     })
 }
-
-# contribution_table_dim(mfa1)
