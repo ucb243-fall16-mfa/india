@@ -1,6 +1,9 @@
 context("mfa arguments")
 
 source("../testData.R")
+load("../testMFAobj.rda")
+load("../testMats.rda")
+load("../testRawData.rda")
 
 test_that("check_data passes tests", {
     expect_true(check_data(testData[,2:13],
@@ -45,4 +48,17 @@ test_that("check_scale and check_center work", {
     ## scale and center aren't logical values
     expect_error(check_center("Hi There"))
     expect_error(check_scale("Hi There"))
+})
+
+test_that("mfa object is properly computed", {
+    ## make sure it's an mfa object!
+    expect_true(check_mfa(MFA))
+
+    ## compute a test object
+    testMFA <- mfa(data, sets, ncomps = 2)
+
+    ## make sure all of its components are correct
+    expect_true(identical(testP, round(testMFA$P, 6)))
+    expect_true(identical(testQ, round(testMFA$Q, 6)))
+    expect_true(identical(testL, round(testMFA$lambda, 6)))
 })
