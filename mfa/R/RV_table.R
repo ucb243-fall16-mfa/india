@@ -2,7 +2,8 @@
 #'
 #' Function to calculate the RV coefficient between sets of variables
 #' @param data the original datatable
-#' @param sets list of vectors containing the variables between which the RV coefficient
+#' @param sets list of vectors containing the variables between which the RV
+#'             coefficient
 #' will be calculated
 #' @keywords RV similarity measure table set
 #' @export

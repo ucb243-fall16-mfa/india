@@ -1,15 +1,17 @@
 #' contribution_obs_dim
 #'
 #' Calculate the contributions of an observation to a dimension
-#' @param x - the mfa object
-#' @param l_range - how many dimensions should be returned?
+#' @param mfa - the mfa object
+#' @param l_max - how many dimensions should be returned?
 #' @return a matrix with the contributions of an observation to a dimension
 
-contribution_obs_dim <- function(x, ...) UseMethod('contribution_obs_dim')
+contribution_obs_dim <- function(mfa, ...) UseMethod('contribution_obs_dim')
 
-contribution_obs_dim.mfa <- function(x, l_range = 1:2){
-  m <- attributes(x)$rowWeights
-  m * x$commonFactorScores[, l_range]^2 / sum(m * x$commonFactorScores[, l_range]^2)
+contribution_obs_dim.mfa <- function(mfa, l_max = 2){
+    check_contribution_params(mfa, l_max)
+    m <- attributes(mfa)$rowWeights
+    m * mfa$commonFactorScores[, 1:l_max]^2 /
+        sum(m * mfa$commonFactorScores[, 1:l_max]^2)
 }
 
 # contribution_obs_dim(mfa1)
