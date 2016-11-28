@@ -2,9 +2,7 @@
 #'
 #' Plot the compromise scores for the first two extracted dimensions
 #' @param x - the mfa object
-#' @param title - chart title
-#' @param color - optional vector of equal length to the rows of the original 
-#' data
+#' @param title - optional chart title
 #' @return a plot with the projection of each observation onto the first two
 #' extracted components
 
@@ -12,8 +10,7 @@
 
 plot_partial_factor <- function(x, ...) UseMethod('plot_partial_factor')
 
-plot_partial_factor.mfa <- function(x, color = NULL
-                                    , title = 'Partial Factor Scores'){
+plot_partial_factor.mfa <- function(x, title = 'Partial Factor Scores'){
   
   # Set plotting parameters
   tables <- length(x$partialFactorScores)
@@ -29,6 +26,7 @@ plot_partial_factor.mfa <- function(x, color = NULL
   y_range <- c(min(pfs_combined[,2]), max(pfs_combined[,2]))
   
   # If color argument is given
+  color <- attributes(x)$color
   if(!is.null(color)){
     
     # Create color scheme for plotting
