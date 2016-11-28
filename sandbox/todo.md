@@ -1,3 +1,19 @@
+# Tasks
+
+As of November 28
+
+- Shiny Development
+- Package Creation
+- Summary Eigenvalues function (Is this already done?)
+- Code review (e.g., clarity and consistency)
+- Slides Review/Formatting
+- Review Vignettes
+- Bootstrapping and L_g Coefficient
+
+
+
+# Original Assignments
+
 ### MFA
 
 * mfa (Yoni)
@@ -14,7 +30,7 @@
 * plot.mfa (Josiah)
 * plot_compromise (Josiah)
 * plot_partial_factor (Josiah)
-* plot_variable_loadings Josiah
+* plot_variable_loadings (Josiah)
 
 ### Related Methods
 
