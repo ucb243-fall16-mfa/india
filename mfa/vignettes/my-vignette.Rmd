@@ -42,12 +42,8 @@ mfa1
 
 
 #Generic Methods
-
-#summary_eigenvalues.mfa Function
-The summary function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the /% of inertia explained, and the cumulative /% of inertia explained. 
-```{r}
-summary_eigenvalues(mfa1)
-```
+#print.mfa Function
+The print.mfa function takes an mfa object as an input and returns a basic summary of it. This summary consists of the name of the object, the number of smaller tables which make up the entire dataset (i.e. the number of experts rating the wines), the eigenvalues of the mfa object, as well as the variance explained by the first 2 eigenvalues. Also given are the first 2 factor scores.
 
 
 #plot.mfa Function
@@ -77,6 +73,13 @@ plot_variable_loadings(mfa1)
 
 
 #Related Methods and Functions
+
+#summary_eigenvalues.mfa Function
+The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the /% of inertia explained, and the cumulative /% of inertia explained. 
+```{r}
+summary_eigenvalues(mfa1)
+```
+
 
 #ctr_obs_dim function (Contributions of an Observation to a Dimension)
 The ctr_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.
