@@ -42,7 +42,7 @@ Data need not have the same number of variables for in each table, however, all 
 ========================================================
 ![](slides-figure/step2.png)
 
-Singular Value Decomposition is a method of factoring a rectangular matrix into three matrices. The standard singular value decomposition is $$X_k = U_k D_k V_k^\mathsf{T}$$ where $D_k$ is the diagonal matrix of singular values, and $U_k$ and $V_k$ are the matrices of left and right singular vectors, respectively.
+Singular Value Decomposition is a method of factoring a rectangular matrix into three matrices that consolidate information about the variance in the data.
 
 3: Concatenate the tables together
 ========================================================
@@ -54,15 +54,13 @@ At this point, all data points are contained in a single table but have not yet 
 ========================================================
 ![](slides-figure/step3.png)
 
-In this step, each table is divided it's first singular value and each observation can allso be weighted. Mathmatically, this can be represented as $$\tilde{X} = \sqrt{M} X \sqrt{W}$$ where $M$ is a ixi diagonal matrix of observation weights, $X$ is the data, and $W$ is a jxj diagonal matrix of column weights.
+In this step, each table is divided it's first singular value and each observation can also be weighted. (This can be thought of as analogous to scaling variables by their variance.)
 
 Step 5. Compute a generalized singular value composition on the combined table
 ========================================================
 ![](slides-figure/step5.png)
 
-The Generalized Singular Value decomposition consists of taking the singular value composition of the previously normalized-weighted data. Mathmatically, this is: 
-
-$$X = \tilde{U} \tilde{D} \tilde{V}^\mathsf{T}$$ where $\tilde{U}$ and $\tilde{V}$ are the left and right weighted singular vectors of $X$ (See appendix for details). 
+The Generalized Singular Value decomposition consists of taking the singular value composition of the previously normalized-weighted data. (See appendix for details). 
 
 
 The Output
@@ -70,11 +68,11 @@ The Output
 
 There are three major types of information to analyze:  
 
-**1. Factor Scores/Partial Factor Scores:** Consensus view, and how each table differs from the conesensus
-
-**2. Contributions:** Most important elements: variables, observations, and tables 
-
-**3. RV Coefficient:** Similarity between tables
+| Information  |  Description |
+|---|---|
+| Scores  | Consensus view, and how each table differs from the conesensus |
+| Contributions | Most important elements: variables, observations, and tables |
+| Coefficients | Similarity between the tables |
 
 Case Study
 ========================================================
@@ -83,7 +81,7 @@ Case Study
 
 Wine Tasting
 ========================================================
-Ten wine assessors were asked to rate 12 different  by various criteria:
+Ten wine assessors were asked to rate 12 different Souvignon blanc's by various criteria:
 - cat pee
 - passion fruit
 - green pepper
@@ -100,7 +98,7 @@ Sample questions:
 2. Which wine characteristics are the most important in explaining differences?
 3. Which wine experts are most similar to each other?
 
-Wine Similarity
+Similarities and Differences
 ========================================================
 
 ![](slides-figure/compromise_scores.png) 
@@ -111,7 +109,7 @@ The Factor Scores reveal similairities and differences:
 - Greater variety in the Calfornia wines than French or New Zealand wines
 
 
-Wine Similarity (Continued)
+Deviations from the Consensus
 ========================================================
 
 ![](slides-figure/partial_factor_scores.png)
@@ -154,7 +152,7 @@ Here is a list of methods that the package currently supports.
 |  `contribution_obs_dim()` | Importance of each observation  |
 |  `contribution_var_dim()` |  Importance of each variable  |
 |  `contribution_table_dim()` |  Importance of each table  |
-|  `summary_eigenvalues()` |  Basic info. about the eigenvalues  |
+|  `summary_eigenvalues()` |  Basic information about the eigenvalues  |
 |  `RV()` | Similarity between two tables  |
 |  `RV_table()` | Simularity between multiples tables  |
 
