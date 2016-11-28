@@ -24,12 +24,12 @@ For further information concerning centering and scaling refer to the help of th
 The function returns an mfa object with attributes P, Q $\lambda$, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues $\lambda$, which are the singular values squared, $\Delta^2$. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8 (how to cite the paper?).
 
 #Wine data
-The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project and will be used throughout the Vignette to provide examples.
+The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project/data/ and will be used throughout the Vignette to provide examples.
 
 
 
 ```{r}
-data2 <- read.csv("https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project/wines.csv")
+data2 <- read.csv("https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project/data/wines.csv")
 SETS <- list(c(1:6),c(7:12), c(13:18),c(19:23),c(24:29),c(30:34),c(35:38),c(39:44),c(45:49),c(50:53))
 
 mfa1 <- mfa(data = data, sets = SETS)
