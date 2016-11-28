@@ -21,15 +21,12 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
   x_range <- c(min(x$Q[,1]), max(x$Q[,1]))
   y_range <- c(min(x$Q[,2]), max(x$Q[,2]))
   
-  # TEMPORARY STOP-GAP MEASURE
-  var_names <- gsub('\\.[0-9]', '', unlist(SETS_2))
-  
   # Loop through and plot each table
   for (k in 1:tables){
     
     # Subset the relevant matrix
     loadings_k <- x$Q[attributes(x)$sets[[k]],]
-    var_names_k <- var_names[attributes(x)$sets[[k]]]
+
     
     # Plot the data
     plot(loadings_k[,1]
@@ -46,12 +43,14 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
          , y = y_range[2]
          , labels = paste0('k=', k))
     
-    # Text to identify the variable
-    text(x = loadings_k[,1]
-         , y = loadings_k[,2]
-         , labels = var_names_k
-         , pos = 1
-         )
+    # Text to identify the variable if it exists
+    if(!is.null(attributes(x)$var_names)){
+        text(x = loadings_k[,1]
+             , y = loadings_k[,2]
+             , labels = attributes(x)$var_names[[k]]
+             , pos = 1
+        )
+    }
     
     # Plot center lines
     abline(v = 0, h = 0)
@@ -59,5 +58,5 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
   mtext(title, outer = TRUE, cex = 1.5)
 }
 
-# plot_variable_loadings(mfa1, substr(wine$ID, 1, 2))
 # plot_variable_loadings(mfa1)
+# plot_variable_loadings(mfa2)

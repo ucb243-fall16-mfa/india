@@ -3,7 +3,6 @@
 #' Plot the compromise scores for the first two extracted dimensions
 #' @param x - the mfa object
 #' @param title - chart title
-#' @param color - optional vector of equal length to the rows of the original data
 #' @return a plot with the projection of each observation onto the first two
 #' extracted components
 
@@ -11,10 +10,12 @@
 
 plot_compromise <- function(x, ...) UseMethod('plot_compromise')
 
-plot_compromise.mfa <- function(x, color = NULL, title = 'Common Factor Scores'){
+plot_compromise.mfa <- function(x, title = 'Common Factor Scores'){
   
   par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
-
+  
+  color <- attributes(x)$color
+  
   if(!is.null(color)){
     
     # Create color scheme for plotting
@@ -58,4 +59,4 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Common Factor Scores')
   mtext(title, outer = TRUE, cex = 1.5)
 }
 
-# plot_compromise(mfa1, substr(wine$ID, 1, 2))
+# plot_compromise(mfa2)
