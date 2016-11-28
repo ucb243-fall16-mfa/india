@@ -4,106 +4,121 @@ author: Dario Cantore, Josiah Davis, Yanli Fan, Yoni Ackerman
 date: 12/2/2016
 autosize: false
 
-What is Multiple Factor Analysis?
+Agenda
+========================================================
+1. The Algorithm
+2. Case Study
+3. Our Package
+4. Appendix: GSVD
+
+The Algorithm
 ========================================================
 
-"Multiple factor analysis (MFA, also called multiple factorial analysis) is an extension of principal component analysis (PCA) tailored to handle multiple data tables that measure sets of variables collected on the same observations, or, alternatively, (in dual-MFA) multiple data tables where the same variables are measured on different sets of observations. " - SOURCE
+In a nutshell
+========================================================
+
+Multiple factor analysis... is an extension of principal component analysis tailored to handle multiple data tables that measure sets of variables collected on the same observations^1
 
 What is the Multiple Factor Analysis Algorithm?
 ========================================================
-1. K tables of $J_k$ variables collected on the same observations
-2. Compute generalized PCA on each of the K tables (where $\gamma$ is the first singular value of each table)
-3. Normalize each table by dividing by its first singular value ($\gamma$)
-4. Concatenate the K normalized tables
-5. Compute a generalized PCA on the concatenated table
 
-SOURCE
-
-Step 1: K tables collected on the same observations
+What is the Multiple Factor Analysis Algorithm?
 ========================================================
-- Tables can have different numbers of variables
-- Each table is assumed to have the same number of rows
+1. Collect multiple tables of data related to the same items
+2. Calculate the singular values of each table
+3. Concatenate the data together tables
+4. Normalize and weight the data
+5. Compute a generalized singular value composition on the combined table
 
+_Note:_ k refers to the number of tables, i refers to the number of observaions, and j refers to the number of variables.
 
+1: Collect multiple tables of data related to the same items
+========================================================
 ![](slides-figure/step1.png)
 
+Data need not have the same number of variables for in each table, however, all data should have the same number of observations/items.
 
-Step 2: Compute generalized SVD on each of the K tables
+2: Calculate the singular values of each table
 ========================================================
-
-$$
-\mathbf{X = U D V^\mathsf{T}}
-$$
-
-- $U$ is the matrix of left singular vectors of 
-- $D$ is the diagonal matrix of singular values
-- $V$ is the matrix of right singular vectors
-
 ![](slides-figure/step2.png)
 
-Step 3: Normalize each table by dividing by its first singular value
+Singular Value Decomposition is a method of factoring a rectangular matrix into three matrices. The standard singular value decomposition is $$X_k = U_k D_k V_k^\mathsf{T}$$ where $D_k$ is the diagonal matrix of singular values, and $U_k$ and $V_k$ are the matrices of left and right singular vectors, respectively.
+
+3: Concatenate the tables together
 ========================================================
-- Placeholder
-- Placeholder
-
-![](slides-figure/step3.png)
-
-Step 4: Concatenate the K normalized tables
-========================================================
-- Placeholder
-- Placeholder
-
-
 ![](slides-figure/step4.png)
 
-Step 5. Compute a generalized PCA on the concatenated table
-========================================================
-- Placeholder
-- Placeholder
+At this point, all data points are contained in a single table but have not yet been scaled.
 
+4: Normalize and weight the data
+========================================================
+![](slides-figure/step3.png)
+
+In this step, each table is divided it's first singular value and each observation can allso be weighted. Mathmatically, this can be represented as $$\tilde{X} = \sqrt{M} X \sqrt{W}$$ where $M$ is a ixi diagonal matrix of observation weights, $X$ is the data, and $W$ is a jxj diagonal matrix of column weights.
+
+Step 5. Compute a generalized singular value composition on the combined table
+========================================================
 ![](slides-figure/step5.png)
 
+The Generalized Singular Value decomposition consists of taking the singular value composition of the previously normalized-weighted data. Mathmatically, this is: 
 
-How to Use The MFA Package
-========================================================
-Getting started is easy. Just install the mfa package from github, and call mfa with your dataset and a list of variables.
-
-
-```r
-library(mfa)
-mfa1 <- mfa(data, sets)
-```
+$$X = \tilde{U} \tilde{D} \tilde{V}^\mathsf{T}$$ where $\tilde{U}$ and $\tilde{V}$ are the left and right weighted singular vectors of $X$ (See appendix for details). 
 
 
-Read our [vignette](https://github.com/fussballball/stat243FinalProject) for detailed tutorials
-
-Interpreting the Output
-========================================================
-Calling the plot function will give you summary charts to help you interpret your data.
-
-
-```r
-library(mfa)
-mfa1 <- mfa(data, sets)
-plot(mfa1)
-```
-
-Compromise Scores
+The Output
 ========================================================
 
-The Compromise Scores give an overall summary of the structure present in the data. 
+There are three major types of information to analyze:  
+
+**1. Factor Scores/Partial Factor Scores:** Consensus view, and how each table differs from the conesensus
+
+**2. Contributions:** Most important elements: variables, observations, and tables 
+
+**3. RV Coefficient:** Similarity between tables
+
+Case Study
+========================================================
+
+
+
+Wine Tasting
+========================================================
+Ten wine assessors were asked to rate 12 different  by various criteria:
+- cat pee
+- passion fruit
+- green pepper
+- mineral
+ 
+There were twelve different wines: four from New Zealand, four from California, and four from France.
+
+Exploratory Data Analysis
+========================================================
+
+Sample questions:
+
+1. What wines are most similar to each other and what wine experts differed most from this consensus?
+2. Which wine characteristics are the most important in explaining differences?
+3. Which wine experts are most similar to each other?
+
+Wine Similarity
+========================================================
 
 ![](slides-figure/compromise_scores.png) 
 
-For example: Notice how similar the New Zealand (NZ) Wines are to each other compared to the California (CA) Wines.
+The Factor Scores reveal similairities and differences:
+- New Zealand wines are very different from French wines
+- French wines 1 and 2 are very similar to each other
+- Greater variety in the Calfornia wines than French or New Zealand wines
 
-Partial Factor Scores
+
+Wine Similarity (Continued)
 ========================================================
-The Partial Factor Scores provide a deeper understanding how the structure of the data varies by group.
 
 ![](slides-figure/partial_factor_scores.png)
 
-For example: Notice how the California wines are generally in between the New Zealand and French Wines.
+The Partial Factor Scores provide a deeper understanding how different wine experts deviated from the consensus:
+- Some wine assessors (e.g., 4) thought California wines were more similar than the rest of the group
+- A few experts (e.g., 7) notices less regional distinctions between California and New Zealand wines
 
 Variable Loadings
 ========================================================
@@ -112,3 +127,79 @@ Variable Loadings reveal the structure and relationship between different variab
 ![](slides-figure/variable_loadings.png)
 
 For example: Notice how V1 and V3 are usually close to each other, while V4 is further away, and often by itself.
+
+Our Package
+========================================================
+
+
+Our Package
+========================================================
+To get started, install the mfa package from github, and call mfa with your dataset and a list of variables.
+
+
+```r
+library(mfa)
+mfa1 <- mfa(data, sets)
+```
+
+Calling the plot function will give you summary charts to interpret your data.
+
+
+```r
+plot(mfa1)
+```
+
+
+Read our [vignette](https://github.com/fussballball/stat243FinalProject) for detailed tutorials
+
+Available Methods 
+========================================================
+Here is a list of methods that the package currently supports.
+- `mfa()`
+- `plot()`
+- `print()`
+- `contribution_obs_dim()`
+- `contribution_var_dim()`
+- `contribution_table_dim()`
+- `summary_eigenvalues()`
+- `RV()`
+- `RV_table()`
+
+
+Appendix: GSVD
+========================================================
+The goal of Generalized Singular Value Decomposition (GSVD) is to conduct a  singular value decomposition of the form:
+
+$$A = \tilde{U} \tilde{\Delta} \tilde{V}^\mathsf{T}$$
+
+Notation: 
+- $A$ is the data
+- $\tilde{U}$ and $\tilde{V}$ are left and right singular vectors of $A$
+- $\tilde{\Delta}$ is a diagonal matrix of singular values
+- $M$ is a diagonal matrix of observation weights
+- $W$ is a diagonal matrix of column weights
+
+Reference: [tutorial by Hervé Abdi](http://www.cimat.mx/~alram/met_num/clases/Abdi-SVD2007-pretty.pdf)
+
+
+Appendix: GSVD (Continued)
+========================================================
+
+The first step is to calculate $\tilde{A}$:
+
+$$\tilde{A} = M^{-1/2} A W^{-1/2}$$
+
+Note: The $W^{-1/2}$ is roughly equivalent to dividing by the singular value
+
+The second step is to calculate the standard SVD of  $\tilde{A}$: 
+
+$$\tilde{A} = P\Delta Q^\mathsf{T}$$
+
+The third step is to calculate $\tilde{U}$, $\tilde{\Delta}$, $\tilde{V}$
+
+$$\tilde{U}=M^{-1/2}P, \tilde{V}=W^{-1/2}Q, \tilde{\Delta}=\Delta$$
+
+References
+========================================================
+
+1. WIREs Comput Stat 2013. doi: 10.1002/wics.1246
