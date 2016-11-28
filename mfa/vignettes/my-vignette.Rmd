@@ -29,7 +29,7 @@ The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2
 
 
 ```{r}
-data2 <- read.csv("https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project/data/wines.csv")
+data <- read.csv("https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project/data/wines.csv")
 SETS <- list(c(1:6),c(7:12), c(13:18),c(19:23),c(24:29),c(30:34),c(35:38),c(39:44),c(45:49),c(50:53))
 
 mfa1 <- mfa(data = data, sets = SETS)
