@@ -145,16 +145,18 @@ Read our [vignette](https://github.com/fussballball/stat243FinalProject) for det
 Available Methods 
 ========================================================
 Here is a list of methods that the package currently supports.
-- `mfa()`
-- `plot()`
-- `print()`
-- `contribution_obs_dim()`
-- `contribution_var_dim()`
-- `contribution_table_dim()`
-- `summary_eigenvalues()`
-- `RV()`
-- `RV_table()`
 
+| Method  |  Description |
+|---|---|
+| `mfa()`  |  Create the mfa object |
+|  `plot()` |  Summary plots |
+|  `print()` |  Basic information about the mfa object |
+|  `contribution_obs_dim()` | Importance of each observation  |
+|  `contribution_var_dim()` |  Importance of each variable  |
+|  `contribution_table_dim()` |  Importance of each table  |
+|  `summary_eigenvalues()` |  Basic info. about the eigenvalues  |
+|  `RV()` | Similarity between two tables  |
+|  `RV_table()` | Simularity between multiples tables  |
 
 Appendix: GSVD
 ========================================================
