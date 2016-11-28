@@ -1,5 +1,5 @@
 ---
-title: "Vignette Title"
+title: "MFA Package Vignette"
 author: "Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -23,7 +23,7 @@ For further information concerning centering and scaling refer to the help of th
 
 The function returns an mfa object with attributes P, Q $\lambda$, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues $\lambda$, which are the singular values squared, $\Delta^2$. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8 (how to cite the paper?).
 
-#Data Wine
+#Wine data
 The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/ﬁnal-project and will be used throughout the Vignette to provide examples.
 
 
@@ -65,8 +65,11 @@ The plot_compromise Function for mfa objects plots the factor scores (factor sco
 The plot_partial_factor Function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.
 
 #plot_variable_loadings
+The plot_variable_loadings Function for mfa objects plots the variable loadings for each...
 ```{r}
-plot(mfa1)
+plot_compromise(mfa1)
+plot_partial_factor(mfa1)
+plot_variable_loadings(mfa1)
 
 ```
 
@@ -75,22 +78,21 @@ plot(mfa1)
 
 #Related Methods and Functions
 
-#Contributions of an Observation to a Dimension
-The ctr_o_d function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an
-#finish this
+#ctr_obs_dim function (Contributions of an Observation to a Dimension)
+The ctr_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.
 
 $ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}$, where $\lambda_l$ is the eigenvalue of dimension $l$, $m_i$ is the mass of the $i$-th dimension and $f_{i,l}$ is the factor score for the $i$-th observation for the $l$-th dimension.
 
-#Contribution of a Variable to a Dimension
-The ctr_j_l function operates on an mfa object, it returns the contribution of a variable j on a dimension l.
+#ctr_var_dim (Contribution of a Variable to a Dimension)
+The ctr_j_l function operates on an mfa object, it returns the contribution of a variable j on a dimension l.  It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry j,l is:
 
 $ctr_{j,l} = a_j * q_{j,l}$ where $a_j$ is the $\alpha$ weight of the first variable (the inverse of the first singular value of the table from Step 1 of the mfa function), and $q_{j,l}$ is the loading of the $j$th variable for the $l$th dimension.
 
 
-#Contribution of a Table to a Dimension
-The ctr_k_l function operates on an mfa Object, it returns the contribution of a Table $k$ on a Dimension $l$.
+#ctr_table_dim (Contribution of a Table to a Dimension)
+The ctr_table_dim function operates on an mfa Object, it returns the contribution of a Table $k$ on a Dimension $l$. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is: 
 
-$ctr_k_l = \sum_i^{J_k} ctr_j_l$ where $ctr_j_l$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variable in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
+$ctr_k_l = \sum_i^{J_k} ctr_j_l$ where $ctr_j_l$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variables in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
 
 #Escoufier's RV Coefficient
 #RV Function
