@@ -11,7 +11,7 @@
 
 plot_compromise <- function(x, ...) UseMethod('plot_compromise')
 
-plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
+plot_compromise.mfa <- function(x, color = NULL, title = 'Common Factor Scores'){
   
   par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
 
@@ -27,8 +27,8 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
     }
     
     # Plot the data
-    plot(x$factorScores[,1]
-         , x$factorScores[,2]
+    plot(x$commonFactorScores[,1]
+         , x$commonFactorScores[,2]
          , pch = 16
          , cex = 2
          , xlab = 'First Factor'
@@ -36,20 +36,20 @@ plot_compromise.mfa <- function(x, color = NULL, title = 'Compromise'){
          , col = color_scheme)
     
     # Create the legend
-    legend (x = min(x$factorScores[,1])
-            , y = max(x$factorScores[,2])
+    legend (x = min(x$commonFactorScores[,1])
+            , y = max(x$commonFactorScores[,2])
             , legend = unique(color)
             , col = unique(color_scheme)
             , pch = 16)
   } else {
-    plot(x$factorScores[,1]
-         , x$factorScores[,2]
+    plot(x$commonFactorScores[,1]
+         , x$commonFactorScores[,2]
          , xlab = 'First Factor'
          , ylab = 'Second Factor')
   }
   if(!is.null(attr(mfa1, 'ids'))){
-    text(x$factorScores[,1]
-         , x$factorScores[,2]
+    text(x$commonFactorScores[,1]
+         , x$commonFactorScores[,2]
          , pos = 1
          , labels = attr(mfa1, 'ids'))     
   }

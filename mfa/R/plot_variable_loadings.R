@@ -18,8 +18,8 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
       , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   # Min and max plotting dimensions
-  x_range <- c(min(x$loadings[,1]), max(x$loadings[,1]))
-  y_range <- c(min(x$loadings[,2]), max(x$loadings[,2]))
+  x_range <- c(min(x$Q[,1]), max(x$Q[,1]))
+  y_range <- c(min(x$Q[,2]), max(x$Q[,2]))
   
   # TEMPORARY STOP-GAP MEASURE
   var_names <- gsub('\\.[0-9]', '', unlist(SETS_2))
@@ -28,8 +28,8 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
   for (k in 1:tables){
     
     # Subset the relevant matrix
-    loadings_k <- x$loadings[x$sets[[k]] - 1,]
-    var_names_k <- var_names[x$sets[[k]] - 1]
+    loadings_k <- x$Q[attributes(x)$sets[[k]],]
+    var_names_k <- var_names[attributes(x)$sets[[k]]]
     
     # Plot the data
     plot(loadings_k[,1]
