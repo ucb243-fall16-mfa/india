@@ -10,7 +10,7 @@
 #' table1 <- matrix(c(1,2,3,4), nrow = 2)
 #' table2 <- matrix(c(9,5,2,8), nrow = 2)
 #' RV(table1,table2)
-RV = function(table1, table2){
+RV <- function(table1, table2){
   table1 <- as.matrix(table1) # Might be unnecessary
   table2 <- as.matrix(table2)
 
