@@ -120,14 +120,6 @@ The Partial Factor Scores provide a deeper understanding how different wine expe
 - Some wine assessors (e.g., 4) thought California wines were more similar than the rest of the group
 - A few experts (e.g., 7) notices less regional distinctions between California and New Zealand wines
 
-Variable Loadings
-========================================================
-Variable Loadings reveal the structure and relationship between different variables.
-
-![](slides-figure/variable_loadings.png)
-
-For example: Notice how V1 and V3 are usually close to each other, while V4 is further away, and often by itself.
-
 Our Package
 ========================================================
 
