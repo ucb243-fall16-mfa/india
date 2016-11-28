@@ -2,13 +2,13 @@
 
 As of November 28
 
-- Shiny Development
-- Package Creation
-- Summary Eigenvalues function (Is this already done?)
-- Code review (e.g., clarity and consistency)
-- Slides Review/Formatting
-- Review Vignettes
-- Bootstrapping and L_g Coefficient
+- Code review (e.g., clarity and consistency) (Josiah, Dario)
+- Slides Review/Formatting (Yanli, Dario)
+- Review Vignettes (Yanli, Yoni)
+- Shiny/Visualization Review (Yoni, Dario)
+- Summary Eigen & LG_Coefficient (Already done)
+- Package Creation (Josiah, Yoni)
+- Bootstrapping
 
 
 
