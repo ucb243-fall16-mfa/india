@@ -99,6 +99,7 @@ $ctr_k_l = \sum_i^{J_k} ctr_j_l$ where $ctr_j_l$ is the contribution of a variab
 
 #Escoufier's RV Coefficient
 #RV Function
+The RV function takes as input two tables and returns a single value, called the Escoufier's RV Coefficient.
 The RV function analyzes the structure between two tables. It can be seen as the multivariate generalization of the squared Pearson Correlation Coefficient.
 Given two tables as an input it returns the scalar RV.
 RV = $\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\sqrt(trace(table1 \ table1^T) * (table1 \ table1^T) * trace((table2 \ table2^T) * (table2 \ table2^T)))}$ where the Root is taken with respect to the entire denominator and $*$ as well as " " denote the normal Matrix Multiplication.
@@ -109,8 +110,9 @@ RV(data2[,SETS[[1]]], data2[,SETS[[2]]])
 
 
 #RV_Table Function
+
 The RV Table function returns a matrix of RV Coefficients. 
-The RV Table function takes as input one big dataset and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_i_j$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_i_j$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
 
 ```{r}
 RV_table(data2, SETS)
