@@ -2,6 +2,7 @@
 #'
 #' provide a print-out summary of the eigenvalues of an mfa object
 #' @param mfa - the mfa object to summarize
+#' @export
 summary_eigenvalues <- function(mfa){
     ## create the values:
     eigenValues <- mfa$lambda

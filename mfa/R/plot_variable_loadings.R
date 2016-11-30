@@ -1,16 +1,17 @@
 #' plot_variable_loadings
 #'
 #' Plot the compromise scores for the first two extracted dimensions
-#' @param x - the mfa object
+#' @param mfa - the mfa object
 #' @param title - chart title
 #' @return a plot with the variable loadings for each table
+#' @export
 
-plot_variable_loadings <- function(x, ...) UseMethod('plot_variable_loadings')
+plot_variable_loadings <- function(mfa, ...) UseMethod('plot_variable_loadings')
 
-plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
+plot_variable_loadings.mfa <- function(mfa, title = 'Variable Loadings'){
   
   # Set plotting parameters
-  tables <- length(x$partialFactorScores)
+  tables <- length(mfa$partialFactorScores)
   cols <- 5 # Number of columns in the grid
   rows <- tables / cols # Number of rows in the grid
   par(mfrow = c(rows, cols)
@@ -18,14 +19,14 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
       , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   # Min and max plotting dimensions
-  x_range <- c(min(x$Q[,1]), max(x$Q[,1]))
-  y_range <- c(min(x$Q[,2]), max(x$Q[,2]))
+  x_range <- c(min(mfa$Q[,1]), max(mfa$Q[,1]))
+  y_range <- c(min(mfa$Q[,2]), max(mfa$Q[,2]))
   
   # Loop through and plot each table
   for (k in 1:tables){
     
     # Subset the relevant matrix
-    loadings_k <- x$Q[attributes(x)$sets[[k]],]
+    loadings_k <- mfa$Q[attributes(x)$sets[[k]],]
 
     
     # Plot the data
@@ -44,10 +45,10 @@ plot_variable_loadings.mfa <- function(x, title = 'Variable Loadings'){
          , labels = paste0('k=', k))
     
     # Text to identify the variable if it exists
-    if(!is.null(attributes(x)$var_names)){
+    if(!is.null(attributes(mfa)$var_names)){
         text(x = loadings_k[,1]
              , y = loadings_k[,2]
-             , labels = attributes(x)$var_names[[k]]
+             , labels = attributes(mfa)$var_names[[k]]
              , pos = 1
         )
     }

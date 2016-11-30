@@ -1,4 +1,3 @@
-```
 Package: mfa
 Title: Perform multiple factor analysis
 Version: 0.1
@@ -10,6 +9,6 @@ Authors@R: c(
     )
 Description: Conducts multiple factor analysis, an extension of principal components analysis for analyzing situations with multiple measurements on a set of observations.
 Depends: R (>= 3.1.0)
-License: TBD
+License: MIT
 LazyData: true
-```
+RoxygenNote: 5.0.1.9000

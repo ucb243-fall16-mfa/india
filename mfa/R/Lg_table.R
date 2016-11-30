@@ -5,6 +5,7 @@
 #' @param mfa - the mfa object containing the data
 #' @param sets - a numeric list indicating the groups of columns
 #'               that correspond to each table
+#' @export
 Lg_table <- function(mfa, sets){
     check_sets(sets)
     dataset <- mfa$commonFactorScores %*% t(mfa$Q)

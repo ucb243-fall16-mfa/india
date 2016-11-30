@@ -1,19 +1,20 @@
 #' plot_partial_factor
 #'
 #' Plot the compromise scores for the first two extracted dimensions
-#' @param x - the mfa object
+#' @param mfa - the mfa object
 #' @param title - optional chart title
 #' @return a plot with the projection of each observation onto the first two
-#' extracted components
+#'         extracted components
+#' @export
 
 # Include sets as an argument
 
-plot_partial_factor <- function(x, ...) UseMethod('plot_partial_factor')
+plot_partial_factor <- function(mfa, ...) UseMethod('plot_partial_factor')
 
-plot_partial_factor.mfa <- function(x, title = 'Partial Factor Scores'){
+plot_partial_factor.mfa <- function(mfa, title = 'Partial Factor Scores'){
   
   # Set plotting parameters
-  tables <- length(x$partialFactorScores)
+  tables <- length(mfa$partialFactorScores)
   cols <- 5 # Number of columns in the grid
   rows <- tables / cols # Number of rows in the grid
   par(mfrow = c(rows, cols)
@@ -21,12 +22,12 @@ plot_partial_factor.mfa <- function(x, title = 'Partial Factor Scores'){
       , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   # Min and max plotting dimensions
-  pfs_combined <- do.call(rbind, mfa1$partialFactorScores)
+  pfs_combined <- do.call(rbind, mfa$partialFactorScores)
   x_range <- c(min(pfs_combined[,1]), max(pfs_combined[,1]))
   y_range <- c(min(pfs_combined[,2]), max(pfs_combined[,2]))
   
   # If color argument is given
-  color <- attributes(x)$color
+  color <- attributes(mfa)$color
   if(!is.null(color)){
     
     # Create color scheme for plotting
@@ -47,7 +48,7 @@ plot_partial_factor.mfa <- function(x, title = 'Partial Factor Scores'){
     for (k in 1:tables){
       
       # Subset the relevant matrix
-      pfs_k <- x$partialFactorScores[[k]]
+      pfs_k <- mfa$partialFactorScores[[k]]
       
       # Plot the data
       plot(pfs_k[,1]
@@ -87,7 +88,7 @@ plot_partial_factor.mfa <- function(x, title = 'Partial Factor Scores'){
     for (k in 1:tables){
       
       # Subset the relevant matrix
-      pfs_k <- x$partialFactorScores[[k]]
+      pfs_k <- mfa$partialFactorScores[[k]]
       
       # Plot the data
       plot(pfs_k[,1]
