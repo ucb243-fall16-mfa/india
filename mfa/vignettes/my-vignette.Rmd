@@ -118,6 +118,7 @@ The RV Table function takes as input an mfa object and a list which consists of 
 RV_table(data2, SETS)
 ```
 
-
+#Lg_Coefficient Function
+The Lg_coefficient function ... 
 
 
