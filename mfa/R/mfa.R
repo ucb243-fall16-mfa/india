@@ -12,7 +12,7 @@
 #' @param color - optional character vector for mapping a discrete color scale
 #' @return an mfa object contaning the pieces of the resulting analysis
 #' @export
-mfa <- function(data, sets, ncomps = NULL, weights = NULL,
+mfa <- function(data, sets, ncomps = 2, weights = NULL,
                 center = TRUE, scale = TRUE, ids = NULL
                 , color = NULL){
   
