@@ -6,12 +6,10 @@
 #'         the first two extracted components, the partial factor scores,
 #'         and the variable loadings
 #' @export
-plot <- function(x, ...) UseMethod('plot')
-
-plot.mfa <- function(x){
-  plot_compromise(x)
-  plot_partial_factor(x)
-  plot_variable_loadings(x)
+plot.mfa <- function(mfa){
+  plot_compromise(mfa)
+  plot_partial_factor(mfa)
+  plot_variable_loadings(mfa)
 }
 
 # plot(mfa1)

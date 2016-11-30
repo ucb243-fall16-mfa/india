@@ -1,7 +1,7 @@
 #' plot_compromise
 #'
 #' Plot the compromise scores for the first two extracted dimensions
-#' @param x - the mfa object
+#' @param mfa - the mfa object
 #' @param title - chart title
 #' @return a plot with the projection of each observation onto the first two
 #'         extracted components

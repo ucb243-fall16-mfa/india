@@ -1,7 +1,7 @@
 #' plot_partial_factor
 #'
 #' Plot the compromise scores for the first two extracted dimensions
-#' @param x - the mfa object
+#' @param mfa - the mfa object
 #' @param title - optional chart title
 #' @return a plot with the projection of each observation onto the first two
 #'         extracted components
@@ -22,7 +22,7 @@ plot_partial_factor.mfa <- function(mfa, title = 'Partial Factor Scores'){
       , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   # Min and max plotting dimensions
-  pfs_combined <- do.call(rbind, mfa1$partialFactorScores)
+  pfs_combined <- do.call(rbind, mfa$partialFactorScores)
   x_range <- c(min(pfs_combined[,1]), max(pfs_combined[,1]))
   y_range <- c(min(pfs_combined[,2]), max(pfs_combined[,2]))
   

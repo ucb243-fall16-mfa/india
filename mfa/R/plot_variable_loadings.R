@@ -1,7 +1,7 @@
 #' plot_variable_loadings
 #'
 #' Plot the compromise scores for the first two extracted dimensions
-#' @param x - the mfa object
+#' @param mfa - the mfa object
 #' @param title - chart title
 #' @return a plot with the variable loadings for each table
 #' @export
