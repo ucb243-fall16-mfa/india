@@ -4,7 +4,7 @@
 \alias{plot_variable_loadings}
 \title{plot_variable_loadings}
 \usage{
-plot_variable_loadings(x, ...)
+plot_variable_loadings(mfa, ...)
 }
 \arguments{
 \item{x}{- the mfa object}

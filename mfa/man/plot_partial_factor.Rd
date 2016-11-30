@@ -4,7 +4,7 @@
 \alias{plot_partial_factor}
 \title{plot_partial_factor}
 \usage{
-plot_partial_factor(x, ...)
+plot_partial_factor(mfa, ...)
 }
 \arguments{
 \item{x}{- the mfa object}
@@ -13,7 +13,7 @@ plot_partial_factor(x, ...)
 }
 \value{
 a plot with the projection of each observation onto the first two
-extracted components
+        extracted components
 }
 \description{
 Plot the compromise scores for the first two extracted dimensions

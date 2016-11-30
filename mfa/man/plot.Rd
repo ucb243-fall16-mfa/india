@@ -10,8 +10,9 @@ plot(x, ...)
 \item{x}{- the mfa object}
 }
 \value{
-a three plots with the projection of each observation onto the first two
-extracted components, the partial factor scores, and the variable loadings
+a three plots with the projection of each observation onto
+        the first two extracted components, the partial factor scores,
+        and the variable loadings
 }
 \description{
 Create summary plots for the result of the multiple factor analysis

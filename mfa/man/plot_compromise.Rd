@@ -4,7 +4,7 @@
 \alias{plot_compromise}
 \title{plot_compromise}
 \usage{
-plot_compromise(x, ...)
+plot_compromise(mfa, ...)
 }
 \arguments{
 \item{x}{- the mfa object}
@@ -13,7 +13,7 @@ plot_compromise(x, ...)
 }
 \value{
 a plot with the projection of each observation onto the first two
-extracted components
+        extracted components
 }
 \description{
 Plot the compromise scores for the first two extracted dimensions
