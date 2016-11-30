@@ -24,7 +24,7 @@ plot_variable_loadings <- function(mfa, title = 'Variable Loadings'){
   for (k in 1:tables){
     
     # Subset the relevant matrix
-    loadings_k <- mfa$Q[attributes(x)$sets[[k]],]
+    loadings_k <- mfa$Q[attributes(mfa)$sets[[k]],]
 
     
     # Plot the data
