@@ -3,10 +3,13 @@
 #' Plot the compromise scores for the first two extracted dimensions
 #' @param mfa - the mfa object
 #' @param title - chart title
+#' @param dims - Numeric vector of two values signifying dimensions to plot
 #' @return a plot with the variable loadings for each table
 #' @export
 
-plot_variable_loadings <- function(mfa, title = 'Variable Loadings'){
+plot_variable_loadings <- function(mfa, dims = 1:2, title = 'Variable Loadings'){
+  
+  check_plot_dims(length(attributes(mfa)$sets), dims)
   
   # Set plotting parameters
   tables <- length(mfa$partialFactorScores)
@@ -17,8 +20,8 @@ plot_variable_loadings <- function(mfa, title = 'Variable Loadings'){
       , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   # Min and max plotting dimensions
-  x_range <- c(min(mfa$Q[,1]), max(mfa$Q[,1]))
-  y_range <- c(min(mfa$Q[,2]), max(mfa$Q[,2]))
+  x_range <- c(min(mfa$Q[,dims[1]]), max(mfa$Q[,dims[1]]))
+  y_range <- c(min(mfa$Q[,dims[2]]), max(mfa$Q[,dims[2]]))
   
   # Loop through and plot each table
   for (k in 1:tables){
@@ -28,8 +31,8 @@ plot_variable_loadings <- function(mfa, title = 'Variable Loadings'){
 
     
     # Plot the data
-    plot(loadings_k[,1]
-         , loadings_k[,2]
+    plot(loadings_k[,dims[1]]
+         , loadings_k[,dims[2]]
          , pch = 1
          , cex = 2
          , xlim = x_range
@@ -44,8 +47,8 @@ plot_variable_loadings <- function(mfa, title = 'Variable Loadings'){
     
     # Text to identify the variable if it exists
     if(!is.null(attributes(mfa)$var_names)){
-        text(x = loadings_k[,1]
-             , y = loadings_k[,2]
+        text(x = loadings_k[,dims[1]]
+             , y = loadings_k[,dims[2]]
              , labels = attributes(mfa)$var_names[[k]]
              , pos = 1
         )

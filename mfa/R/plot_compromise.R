@@ -3,24 +3,15 @@
 #' Plot the compromise scores for the first two extracted dimensions
 #' @param mfa - the mfa object
 #' @param title - chart title
-#' @dims dims - Dimensions to plot
+#' @param dims - Numeric vector of two values signifying dimensions to plot
 #' @return a plot with the projection of each observation onto the first two
 #'         extracted components
 #' @export
 
 # Compromise isn't showing title and margins are off for color only
 plot_compromise <- function(mfa, dims = 1:2, title = 'Common Factor Scores'){
-  
-  if(length(dims) != 2){
-    warning('plotting only supports two dimensions. Taking the first two')
-    dims <- dims[1:2]
-  }
-  
-  if(max(dims) > length(attributes(mfa)$sets)){
-    warning('there are only', length(attributes(mfa)$sets)
-            ,'Tables in the data. Taking the first two')
-    dims <- 1:2
-  }
+
+  check_plot_dims(length(attributes(mfa)$sets), dims)
   
   par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
   

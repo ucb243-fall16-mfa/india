@@ -3,12 +3,15 @@
 #' Plot the compromise scores for the first two extracted dimensions
 #' @param mfa - the mfa object
 #' @param title - optional chart title
+#' @param dims - Numeric vector of two values signifying dimensions to plot
 #' @return a plot with the projection of each observation onto the first two
 #'         extracted components
 #' @export
 
 # Include sets as an argument
-plot_partial_factor <- function(mfa, title = 'Partial Factor Scores'){
+plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'){
+  
+  check_plot_dims(length(attributes(mfa)$sets), dims)
   
   # Set plotting parameters
   tables <- length(mfa$partialFactorScores)
@@ -20,8 +23,8 @@ plot_partial_factor <- function(mfa, title = 'Partial Factor Scores'){
   
   # Min and max plotting dimensions
   pfs_combined <- do.call(rbind, mfa$partialFactorScores)
-  x_range <- c(min(pfs_combined[,1]), max(pfs_combined[,1]))
-  y_range <- c(min(pfs_combined[,2]), max(pfs_combined[,2]))
+  x_range <- c(min(pfs_combined[,dims[1]]), max(pfs_combined[,dims[1]]))
+  y_range <- c(min(pfs_combined[,dims[2]]), max(pfs_combined[,dims[2]]))
   
   # If color argument is given
   color <- attributes(mfa)$color
@@ -48,8 +51,8 @@ plot_partial_factor <- function(mfa, title = 'Partial Factor Scores'){
       pfs_k <- mfa$partialFactorScores[[k]]
       
       # Plot the data
-      plot(pfs_k[,1]
-           , pfs_k[,2]
+      plot(pfs_k[,dims[1]]
+           , pfs_k[,dims[2]]
            , pch = 16
            , cex = 2
            , xlim = x_range
@@ -88,8 +91,8 @@ plot_partial_factor <- function(mfa, title = 'Partial Factor Scores'){
       pfs_k <- mfa$partialFactorScores[[k]]
       
       # Plot the data
-      plot(pfs_k[,1]
-           , pfs_k[,2]
+      plot(pfs_k[,dims[1]]
+           , pfs_k[,dims[2]]
            , pch = 1
            , cex = 2
            , xlim = x_range
