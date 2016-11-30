@@ -4,7 +4,7 @@
 #' @param mfa - the mfa object
 #' @param l_max - how many dimensions should be returned?
 #' @return a matrix with the contributions of an observation to a dimension
-
+#' @export
 contribution_obs_dim <- function(mfa, ...) UseMethod('contribution_obs_dim')
 
 contribution_obs_dim.mfa <- function(mfa, l_max = 2){

@@ -3,6 +3,7 @@
 #' Function to compute the Lg coefficient between two numeric tables
 #' @param table1 - first numeric data.frame/matrix
 #' @param table2 - second numeric data.frame/matrix
+#' @export
 Lg <- function(table1, table2){
     table1 <- as.matrix(table1) # Might be unnecessary
     table2 <- as.matrix(table2)

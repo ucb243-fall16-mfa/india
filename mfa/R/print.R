@@ -2,6 +2,7 @@
 #'
 #' print function for the mfa class
 #' @param mfa - mfa object to print
+#' @export
 print.mfa <- function(mfa){
     check_mfa(mfa)
     cat('object: "mfa"\n\n')

@@ -6,6 +6,7 @@
 #' @param table2 the second table
 #' @return returns the RV coefficient, a measure of similarity for the 2 tables
 #' @keywords RV similarity measure
+#' @export
 #' @examples
 #' table1 <- matrix(c(1,2,3,4), nrow = 2)
 #' table2 <- matrix(c(9,5,2,8), nrow = 2)

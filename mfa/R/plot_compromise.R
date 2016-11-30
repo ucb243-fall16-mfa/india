@@ -4,17 +4,18 @@
 #' @param x - the mfa object
 #' @param title - chart title
 #' @return a plot with the projection of each observation onto the first two
-#' extracted components
+#'         extracted components
+#' @export
 
 # Compromise isn't showing title and margins are off for color only
 
-plot_compromise <- function(x, ...) UseMethod('plot_compromise')
+plot_compromise <- function(mfa, ...) UseMethod('plot_compromise')
 
-plot_compromise.mfa <- function(x, title = 'Common Factor Scores'){
+plot_compromise.mfa <- function(mfa, title = 'Common Factor Scores'){
   
   par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
   
-  color <- attributes(x)$color
+  color <- attributes(mfa)$color
   
   if(!is.null(color)){
     
@@ -28,8 +29,8 @@ plot_compromise.mfa <- function(x, title = 'Common Factor Scores'){
     }
     
     # Plot the data
-    plot(x$commonFactorScores[,1]
-         , x$commonFactorScores[,2]
+    plot(mfa$commonFactorScores[,1]
+         , mfa$commonFactorScores[,2]
          , pch = 16
          , cex = 2
          , xlab = 'First Factor'
@@ -37,22 +38,22 @@ plot_compromise.mfa <- function(x, title = 'Common Factor Scores'){
          , col = color_scheme)
     
     # Create the legend
-    legend (x = min(x$commonFactorScores[,1])
-            , y = max(x$commonFactorScores[,2])
+    legend(x = min(mfa$commonFactorScores[,1])
+            , y = max(mfa$commonFactorScores[,2])
             , legend = unique(color)
             , col = unique(color_scheme)
             , pch = 16)
   } else {
-    plot(x$commonFactorScores[,1]
-         , x$commonFactorScores[,2]
+    plot(mfa$commonFactorScores[,1]
+         , mfa$commonFactorScores[,2]
          , xlab = 'First Factor'
          , ylab = 'Second Factor')
   }
-  if(!is.null(attr(mfa1, 'ids'))){
-    text(x$commonFactorScores[,1]
-         , x$commonFactorScores[,2]
+  if(!is.null(attr(mfa, 'ids'))){
+    text(mfa$commonFactorScores[,1]
+         , mfa$commonFactorScores[,2]
          , pos = 1
-         , labels = attr(mfa1, 'ids'))     
+         , labels = attr(mfa, 'ids'))     
   }
   
   abline(v = 0, h = 0)
