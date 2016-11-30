@@ -6,9 +6,7 @@
 #' @return a plot with the variable loadings for each table
 #' @export
 
-plot_variable_loadings <- function(mfa, ...) UseMethod('plot_variable_loadings')
-
-plot_variable_loadings.mfa <- function(mfa, title = 'Variable Loadings'){
+plot_variable_loadings <- function(mfa, title = 'Variable Loadings'){
   
   # Set plotting parameters
   tables <- length(mfa$partialFactorScores)

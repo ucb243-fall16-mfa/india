@@ -8,10 +8,7 @@
 #' @export
 
 # Include sets as an argument
-
-plot_partial_factor <- function(mfa, ...) UseMethod('plot_partial_factor')
-
-plot_partial_factor.mfa <- function(mfa, title = 'Partial Factor Scores'){
+plot_partial_factor <- function(mfa, title = 'Partial Factor Scores'){
   
   # Set plotting parameters
   tables <- length(mfa$partialFactorScores)

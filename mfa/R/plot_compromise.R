@@ -8,10 +8,7 @@
 #' @export
 
 # Compromise isn't showing title and margins are off for color only
-
-plot_compromise <- function(mfa, ...) UseMethod('plot_compromise')
-
-plot_compromise.mfa <- function(mfa, title = 'Common Factor Scores'){
+plot_compromise <- function(mfa, title = 'Common Factor Scores'){
   
   par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
   

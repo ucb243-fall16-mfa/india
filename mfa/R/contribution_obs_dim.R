@@ -5,9 +5,8 @@
 #' @param l_max - how many dimensions should be returned?
 #' @return a matrix with the contributions of an observation to a dimension
 #' @export
-contribution_obs_dim <- function(mfa, ...) UseMethod('contribution_obs_dim')
 
-contribution_obs_dim.mfa <- function(mfa, l_max = 2){
+contribution_obs_dim <- function(mfa, l_max = 2){
     check_contribution_params(mfa, l_max)
     m <- attributes(mfa)$rowWeights
     m * mfa$commonFactorScores[, 1:l_max]^2 /

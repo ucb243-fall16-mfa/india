@@ -6,9 +6,8 @@
 #' @param l_max - how many dimensions should be returned?
 #' @return a matrix with the contributions of a variable to a dimension
 #' @export
-contribution_var_dim <- function(mfa, ...) UseMethod('contribution_var_dim')
 
-contribution_var_dim.mfa <- function(mfa, l_max = 2){
+contribution_var_dim <- function(mfa, l_max = 2){
     check_contribution_params(mfa, l_max)
     j_range <- 1:nrow(mfa$Q)
     sapply(1:l_max, function(l){
