@@ -7,7 +7,7 @@
 plot_compromise(mfa, ...)
 }
 \arguments{
-\item{x}{- the mfa object}
+\item{mfa}{- the mfa object}
 
 \item{title}{- chart title}
 }

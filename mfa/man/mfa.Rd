@@ -4,8 +4,8 @@
 \alias{mfa}
 \title{mfa}
 \usage{
-mfa(data, sets, ncomps = NULL, weights = NULL, center = TRUE,
-  scale = TRUE, ids = NULL, color = NULL)
+mfa(data, sets, ncomps = 2, weights = NULL, center = TRUE, scale = TRUE,
+  ids = NULL, color = NULL)
 }
 \arguments{
 \item{data}{- a numeric data.frame/matrix containing the data}

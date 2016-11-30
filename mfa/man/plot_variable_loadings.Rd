@@ -7,7 +7,7 @@
 plot_variable_loadings(mfa, ...)
 }
 \arguments{
-\item{x}{- the mfa object}
+\item{mfa}{- the mfa object}
 
 \item{title}{- chart title}
 }

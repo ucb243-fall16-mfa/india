@@ -7,7 +7,7 @@
 plot_partial_factor(mfa, ...)
 }
 \arguments{
-\item{x}{- the mfa object}
+\item{mfa}{- the mfa object}
 
 \item{title}{- optional chart title}
 }
