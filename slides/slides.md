@@ -26,17 +26,17 @@ What is the Multiple Factor Analysis Algorithm?
 ========================================================
 1. Collect multiple tables of data related to the same items
 2. Calculate the singular values of each table
-3. Concatenate the data together tables      (Note: Strange use of "together"?)
-4. Normalize and weight the data       (Note: weight or weigh?)
+3. Concatenate the data together tables
+4. Normalize and weight the data
 5. Compute a generalized singular value composition on the combined table
 
-_Note:_ k refers to the number of tables, i refers to the number of observations, and j refers to the number of variables.
+_Note:_ k refers to the number of tables, i refers to the number of observaions, and j refers to the number of variables.
 
 1: Collect multiple tables of data related to the same items
 ========================================================
 ![](slides-figure/step1.png)
 
-Data need not have the same number of variables for in each table (Note: delete for?), however, (replace by "but" (without comma)) all data should have the same number of observations/items.
+Data need not have the same number of variables for in each table, however, all data should have the same number of observations/items.
 
 2: Calculate the singular values of each table
 ========================================================
@@ -54,9 +54,9 @@ At this point, all data points are contained in a single table but have not yet 
 ========================================================
 ![](slides-figure/step3.png)
 
-In this step, each table is divided it's (Note: its?) first singular value and each observation can also be weighted. (This can be thought of as analogous to scaling variables by their variance.)
+In this step, each table is divided it's first singular value and each observation can also be weighted. (This can be thought of as analogous to scaling variables by their variance.)
 
-Step 5. Compute a generalized singular value composition on the combined table (Note: Add a point at the end to be consistent?)
+Step 5. Compute a generalized singular value composition on the combined table
 ========================================================
 ![](slides-figure/step5.png)
 
@@ -81,7 +81,7 @@ Case Study
 
 Wine Tasting
 ========================================================
-Ten wine assessors were asked to rate 12 different Souvignon blanc's (Note: Sauvignon Blancs) by various criteria (, among them. Because not all are having the same criteria?):
+Ten wine assessors were asked to rate 12 different Souvignon blanc's by various criteria:
 - cat pee
 - passion fruit
 - green pepper
@@ -103,10 +103,10 @@ Similarities and Differences
 
 ![](slides-figure/compromise_scores.png) 
 
-The Factor Scores reveal similarities and differences:
+The Factor Scores reveal similairities and differences:
 - New Zealand wines are very different from French wines
 - French wines 1 and 2 are very similar to each other
-- (Note: There is) Greater variety in the Calfornia wines than French or New Zealand wines
+- Greater variety in the Calfornia wines than French or New Zealand wines
 
 
 Deviations from the Consensus
@@ -115,8 +115,8 @@ Deviations from the Consensus
 ![](slides-figure/partial_factor_scores.png)
 
 The Partial Factor Scores provide a deeper understanding how different wine experts deviated from the consensus:
-- Some wine assessors (e.g., 4) thought California(Note: Californian) wines were (Note: are) more similar than the rest of the group
-- A few experts (e.g., 7) notices (notice or noticed) less regional distinctions between California and New Zealand wines (californian, new zealandian?)
+- Some wine assessors (e.g., 4) thought California wines were more similar than the rest of the group
+- A few experts (e.g., 7) notices less regional distinctions between California and New Zealand wines
 
 Our Package
 ========================================================
