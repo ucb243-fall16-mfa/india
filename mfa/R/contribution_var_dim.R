@@ -8,13 +8,18 @@
 #' @export
 
 contribution_var_dim <- function(mfa, l_max = 2){
-    check_contribution_params(mfa, l_max)
-    j_range <- 1:nrow(mfa$Q)
-    sapply(1:l_max, function(l){
-        sapply(j_range, function(j){
-            attributes(mfa)$colWeights[j] * mfa$Q[j, l]^2 * 1000
-        })
-    })
+  
+  ## perform checking
+  check_mfa(mfa)
+  check_contribution_params(mfa, l_max)
+  
+  ## compute contributions
+  j_range <- 1:nrow(mfa$Q)
+  sapply(1:l_max, function(l){
+      sapply(j_range, function(j){
+          attributes(mfa)$colWeights[j] * mfa$Q[j, l]^2 * 1000
+      })
+  })
 }
 
 # contribution_var_dim(mfa1)

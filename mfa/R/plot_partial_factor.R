@@ -11,9 +11,11 @@
 # Include sets as an argument
 plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'){
   
+  ## perform checking
+  check_mfa(mfa)
   check_plot_dims(length(attributes(mfa)$sets), dims)
   
-  # Set plotting parameters
+  ## set plotting parameters
   tables <- length(mfa$partialFactorScores)
   cols <- 5 # Number of columns in the grid
   rows <- tables / cols # Number of rows in the grid
@@ -21,16 +23,16 @@ plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'
       , oma = c(4, 2, 4, 2) # Outer margin (b, r, u, l)
       , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
-  # Min and max plotting dimensions
+  ## min and max plotting dimensions
   pfs_combined <- do.call(rbind, mfa$partialFactorScores)
   x_range <- c(min(pfs_combined[,dims[1]]), max(pfs_combined[,dims[1]]))
   y_range <- c(min(pfs_combined[,dims[2]]), max(pfs_combined[,dims[2]]))
   
-  # If color argument is given
+  ## if color argument is given
   color <- attributes(mfa)$color
   if(!is.null(color)){
     
-    # Create color scheme for plotting
+    ## create color scheme for plotting
     color_pallette <- c('#e31a1c'
                         , '#1f78b4'
                         , '#33a02c'
@@ -44,13 +46,13 @@ plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'
       color_scheme[color == unique(color)[i]] <- color_pallette[i]
     }
     
-    # Loop through and plot each table
+    ## loop through and plot each table
     for (k in 1:tables){
       
-      # Subset the relevant matrix
+      ## subset the relevant matrix
       pfs_k <- mfa$partialFactorScores[[k]]
       
-      # Plot the data
+      ## plot the data
       plot(pfs_k[,dims[1]]
            , pfs_k[,dims[2]]
            , pch = 16
@@ -61,7 +63,7 @@ plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'
            , ylab = ''
            , col = color_scheme)
       
-      # Create the legend (first plot only)
+      ## create the legend (first plot only)
       if(k == 1){
         legend(x = x_range[1]
                , y = y_range[2]
@@ -72,25 +74,25 @@ plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'
                )
       }
       
-      # Text to identify the table number
+      ## text to identify the table number
       text(x = x_range[2] * .8
            , y = y_range[2]
            , labels = paste0('k=', k))
       
-      # Plot center lines
+      ## plot center lines
       abline(v = 0, h = 0)
     }
     
-    # No Color Argument Given
+    ## no color argument given
   } else {
     
-    # Loop through and plot each table
+    ## loop through and plot each table
     for (k in 1:tables){
       
-      # Subset the relevant matrix
+      ## subset the relevant matrix
       pfs_k <- mfa$partialFactorScores[[k]]
       
-      # Plot the data
+      ## plot the data
       plot(pfs_k[,dims[1]]
            , pfs_k[,dims[2]]
            , pch = 1
@@ -100,12 +102,12 @@ plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'
            , xlab = ''
            , ylab = '')
       
-      # Text to identify the table number
+      ## text to identify the table number
       text(x = x_range[2] * .8
            , y = y_range[2]
            , labels = paste0('k=', k))
       
-      # Plot center lines
+      ## plot center lines
       abline(v = 0, h = 0)
     }
   }

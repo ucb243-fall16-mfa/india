@@ -7,10 +7,14 @@
 #' @export
 
 contribution_obs_dim <- function(mfa, l_max = 2){
-    check_contribution_params(mfa, l_max)
-    m <- attributes(mfa)$rowWeights
-    m * mfa$commonFactorScores[, 1:l_max]^2 /
-        sum(m * mfa$commonFactorScores[, 1:l_max]^2)
+  ## perform checking
+  check_mfa(mfa)
+  check_contribution_params(mfa, l_max)
+  
+  
+  m <- attributes(mfa)$rowWeights
+  m * mfa$commonFactorScores[, 1:l_max]^2 / 
+    sum(m * mfa$commonFactorScores[, 1:l_max]^2)
 }
 
 # contribution_obs_dim(mfa1)

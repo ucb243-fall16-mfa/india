@@ -11,6 +11,8 @@
 # Compromise isn't showing title and margins are off for color only
 plot_compromise <- function(mfa, dims = 1:2, title = 'Common Factor Scores'){
 
+  ## perform checking
+  check_mfa(mfa)
   check_plot_dims(length(attributes(mfa)$sets), dims)
   
   par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))

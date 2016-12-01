@@ -7,12 +7,17 @@
 #' @export
 
 contribution_table_dim <- function(mfa, l_max = 2){
-    check_contribution_params(mfa, l_max)
-    sets <- attributes(mfa)$sets
-    a <- attributes(mfa)$colWeights
-    sapply(1:l_max, function(l){
-        sapply(sets, function(k){
-            sum(a[k] * mfa$Q[k, l]^2)
-        })
-    })
+  
+  ## perform checking
+  check_mfa(mfa)
+  check_contribution_params(mfa, l_max)
+  
+  ## compute contributions
+  sets <- attributes(mfa)$sets
+  a <- attributes(mfa)$colWeights
+  sapply(1:l_max, function(l){
+      sapply(sets, function(k){
+          sum(a[k] * mfa$Q[k, l]^2)
+      })
+  })
 }

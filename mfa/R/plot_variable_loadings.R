@@ -9,6 +9,8 @@
 
 plot_variable_loadings <- function(mfa, dims = 1:2, title = 'Variable Loadings'){
   
+  ## perform checking
+  check_mfa(mfa)
   check_plot_dims(length(attributes(mfa)$sets), dims)
   
   # Set plotting parameters
