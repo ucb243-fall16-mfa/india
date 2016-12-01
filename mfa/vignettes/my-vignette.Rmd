@@ -8,7 +8,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa() function, which performs multiple factor analysis on the given data. 
+The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa function, which performs multiple factor analysis on the given data. 
 Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain amongst others factor scores and variable loadings. A thorough description of this can be found in WIREs Comput Stat 2013. doi: 10.1002/wics.1246.
 
 #Installing the package
