@@ -8,8 +8,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa() function, which performs multiple factor analysis on the given data. 
-Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain amongst others factor scores and variable loadings. A thorough description of this can be found in WIREs Comput Stat 2013. doi: 10.1002/wics.1246.
+The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa function, which performs multiple factor analysis on the given data. 
+Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain, amongst others, factor scores and variable loadings. A thorough description of this can be found in WIREs Comput Stat 2013. doi: 10.1002/wics.1246.
 
 #Installing the package
 To install the package download the Github repository.
@@ -19,6 +19,10 @@ Open R Studio and setwd to the root folder (the folder that contains the Github 
 #install("mfa")
 #library(mfa)
 
+##after loading the library, change the working directory to the directory
+##of the package. In most cases the following line should suffice:
+#setwd("./mfa/")
+##execute the following line to knit the vignette
 #devtools::build_vignettes()
 
 ```
@@ -34,7 +38,7 @@ Center is by default True and indicates whether centering in Step 1 (as outlined
 Scale is by default True and indicates whether scaling in Step 1 (as outlined above) will  be done. By default, each column is scaled so that the sum of its squared elements is 1.
 For further information concerning centering and scaling refer to the help of the base scale function ?scale. Please note the different meanings of scale = TRUE between base package and mfa function. Whereas in the standard R function scale = TRUE means the sum of the squared values of each column add up to nrow(data) - 1 (sample SD = 1), here they add up to 1.
 
-The function returns an mfa object with attributes P, Q $\lambda$, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues $\lambda$, which are the singular values squared, $\Delta^2$. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8 (how to cite the paper?).
+The function returns an mfa object with attributes P, Q $\lambda$, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues $\lambda$, which are the singular values squared, $\Delta^2$. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8.
 
 #Wine data
 The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/Final-project/data/ and will be used throughout the Vignette to provide examples.
@@ -66,25 +70,28 @@ The print.mfa function takes an mfa object as an input and returns a basic summa
 The plot function for mfa objects automatically plots the Compromise, Partial Factor Scores and Variable Loadings, using the plot_compromise, plot_partial_factor and plot_variable_loadings functions. It can take a color argument as input, which should be a list of vectors. Each element of the vector denotes observations (e.g. rows) of the data table which will then be displayed in the same color.
 
 ```{r}
-#grid <- par(mar = rep(2, 2))
-#plot(mfa1)
-#par(grid)
+plot(mfa1)
 ```
 
 
 #plot_compromise Function
 The plot_compromise Function for mfa objects plots the factor scores (factor scores and compromise are used interchangeably here) of the object.
 
+```{r}
+plot_compromise(mfa1)
+
+```
+
 #plot_partial_factor Function
 The plot_partial_factor Function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.
 
-#plot_variable_loadings Functio
+```{r}
+plot_partial_factor(mfa1)
+```
+#plot_variable_loadings Function
 The plot_variable_loadings Function for mfa objects plots the variable loadings for each...
 ```{r}
-#plot_compromise(mfa1)
-#plot_partial_factor(mfa1)
-#plot_variable_loadings(mfa1)
-
+plot_variable_loadings(mfa1)
 ```
 
 
@@ -92,14 +99,14 @@ The plot_variable_loadings Function for mfa objects plots the variable loadings 
 
 #Related Methods and Functions
 
-#summary_eigenvalues.mfa Function
-The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the /% of inertia explained, and the cumulative /% of inertia explained. 
+#summary_eigenvalues Function
+The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained. 
 ```{r}
 summary_eigenvalues(mfa1)
 ```
 
 
-#contribution_obs_dim Function (Contributions of an Observation to a Dimension)
+#contribution_obs_dim Function (Contribution of an Observation to a Dimension)
 The contribution_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.
 
 $ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}$, where $\lambda_l$ is the eigenvalue of dimension $l$, $m_i$ is the mass of the $i$-th dimension and $f_{i,l}$ is the factor score for the $i$-th observation for the $l$-th dimension.
@@ -124,7 +131,7 @@ contribution_var_dim(mfa = mfa1, l_max = 2)
 #contribution_table_dim Function(Contribution of a Table to a Dimension)
 The contribution_table_dim function operates on an mfa Object, it returns the contribution of a Table $k$ on a Dimension $l$. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is: 
  
-$ctr_k_l = \sum_i^{J_k} ctr_j_l$ where $ctr_j_l$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variables in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
+$ctr_{kl} = \sum_i^{J_k} ctr_{jl}$ where $ctr_{jl}$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variables in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
 
 ```{r}
 contribution_table_dim(mfa = mfa1, l_max = 4)
@@ -146,13 +153,33 @@ RV(data[,SETS[[1]]], data[,SETS[[2]]])
 #RV_Table Function
 
 The RV Table function returns a matrix of RV Coefficients. 
-The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_i_j$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_{ij}$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
 
 ```{r}
 RV_table(mfa = mfa1, SETS[1:4])
 ```
 
-#Lg_Coefficient Function
-The Lg_coefficient function ... 
+#Lg Function
+The Lg function takes as input two tables and returns a single value, called $L_g$ coefficient. The $L_g$ coefficient measures the richness of the common structure between the two tables: the larger the $L_g$ coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).
+
+It is calculated the following way:
+$L_g = \frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$ 
+where the notation is the same as for the RV function and $\gamma_{1k}$ denotes the first singular value of table k. 
+
+```{r}
+Lg(data[,SETS[[1]]], data[,SETS[[2]]])
+```
+
+#Lg_table Function
+The Lg_table function is related to the Lg function in exactly the same way as the RV_table function is related to the RV function.  
+The Lg Table function returns a matrix of Lg Coefficients. 
+The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where $M_{ij}$ is the Lg coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+
+```{r}
+Lg_table(mfa = mfa1, SETS[1:4])
+
+```
+
+
 
 

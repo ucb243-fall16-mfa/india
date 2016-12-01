@@ -152,7 +152,7 @@ mfa1</code></pre></div>
 </div>
 <div id="summary_eigenvalues.mfa-function" class="section level1">
 <h1>summary_eigenvalues.mfa Function</h1>
-<p>The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained.</p>
+<p>The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the /% of inertia explained, and the cumulative /% of inertia explained.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary_eigenvalues</span>(mfa1)</code></pre></div>
 <pre><code>##                Comp 1 Comp 2 Comp 3 Comp 4 Comp 5 Comp 6 Comp 7 Comp 8
 ## SingularValue    0.88   0.35   0.30   0.28   0.24   0.20   0.18   0.16
@@ -167,8 +167,8 @@ mfa1</code></pre></div>
 ## PercentInertia   1.48    1.07    0.90    0.00
 ## CumPercIner     98.03   99.10  100.00  100.00</code></pre>
 </div>
-<div id="contribution_obs_dim-function-contribution-of-an-observation-to-a-dimension" class="section level1">
-<h1>contribution_obs_dim Function (Contribution of an Observation to a Dimension)</h1>
+<div id="contribution_obs_dim-function-contributions-of-an-observation-to-a-dimension" class="section level1">
+<h1>contribution_obs_dim Function (Contributions of an Observation to a Dimension)</h1>
 <p>The contribution_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.</p>
 <p><span class="math inline">\(ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}\)</span>, where <span class="math inline">\(\lambda_l\)</span> is the eigenvalue of dimension <span class="math inline">\(l\)</span>, <span class="math inline">\(m_i\)</span> is the mass of the <span class="math inline">\(i\)</span>-th dimension and <span class="math inline">\(f_{i,l}\)</span> is the factor score for the <span class="math inline">\(i\)</span>-th observation for the <span class="math inline">\(l\)</span>-th dimension.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contribution_obs_dim</span>(<span class="dt">mfa =</span> mfa1, <span class="dt">l_max =</span> <span class="dv">3</span>)</code></pre></div>
@@ -249,7 +249,7 @@ mfa1</code></pre></div>
 <div id="contribution_table_dim-functioncontribution-of-a-table-to-a-dimension" class="section level1">
 <h1>contribution_table_dim Function(Contribution of a Table to a Dimension)</h1>
 <p>The contribution_table_dim function operates on an mfa Object, it returns the contribution of a Table <span class="math inline">\(k\)</span> on a Dimension <span class="math inline">\(l\)</span>. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is:</p>
-<p><span class="math inline">\(ctr_{kl} = \sum_i^{J_k} ctr_{jl}\)</span> where <span class="math inline">\(ctr_{jl}\)</span> is the contribution of a variable <span class="math inline">\(j\)</span> to a dimension <span class="math inline">\(l\)</span> and the sum goes over all variables in Table <span class="math inline">\(k\)</span>. The contributions of a table <span class="math inline">\(k\)</span> to a dimension <span class="math inline">\(l\)</span> is therefore just the sum of the contributions of the variables comprising the table to the dimension <span class="math inline">\(l\)</span>.</p>
+<p><span class="math inline">\(ctr_k_l = \sum_i^{J_k} ctr_j_l\)</span> where <span class="math inline">\(ctr_j_l\)</span> is the contribution of a variable <span class="math inline">\(j\)</span> to a dimension <span class="math inline">\(l\)</span> and the sum goes over all variables in Table <span class="math inline">\(k\)</span>. The contributions of a table <span class="math inline">\(k\)</span> to a dimension <span class="math inline">\(l\)</span> is therefore just the sum of the contributions of the variables comprising the table to the dimension <span class="math inline">\(l\)</span>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contribution_table_dim</span>(<span class="dt">mfa =</span> mfa1, <span class="dt">l_max =</span> <span class="dv">4</span>)</code></pre></div>
 <pre><code>##             [,1]       [,2]       [,3]       [,4]
 ##  [1,] 0.10113269 0.09540216 0.09905229 0.06536089
@@ -275,7 +275,7 @@ RV = <span class="math inline">\(\frac{trace(table1 \ table1^T) * trace(table2 \
 </div>
 <div id="rv_table-function" class="section level1">
 <h1>RV_Table Function</h1>
-<p>The RV Table function returns a matrix of RV Coefficients. The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where <span class="math inline">\(M_{ij}\)</span> is the RV coefficient between Table <span class="math inline">\(i\)</span> and Table <span class="math inline">\(j\)</span>. Table <span class="math inline">\(i\)</span> is created by taking the <span class="math inline">\(i\)</span>-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.</p>
+<p>The RV Table function returns a matrix of RV Coefficients. The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where <span class="math inline">\(M_i_j\)</span> is the RV coefficient between Table <span class="math inline">\(i\)</span> and Table <span class="math inline">\(j\)</span>. Table <span class="math inline">\(i\)</span> is created by taking the <span class="math inline">\(i\)</span>-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">RV_table</span>(<span class="dt">mfa =</span> mfa1, SETS[<span class="dv">1</span>:<span class="dv">4</span>])</code></pre></div>
 <pre><code>##           [,1]      [,2]      [,3]      [,4]
 ## [1,] 1.0000000 0.8677509 0.8603765 0.7191066
@@ -283,23 +283,10 @@ RV = <span class="math inline">\(\frac{trace(table1 \ table1^T) * trace(table2 \
 ## [3,] 0.8603765 0.7755188 1.0000000 0.7980148
 ## [4,] 0.7191066 0.7524241 0.7980148 1.0000000</code></pre>
 </div>
-<div id="lg-function" class="section level1">
-<h1>Lg Function</h1>
-<p>The Lg function takes as input two tables and returns a single value, called <span class="math inline">\(L_g\)</span> coefficient. The <span class="math inline">\(L_g\)</span> coefficient measures the richness of the common structure between the two tables: the larger the <span class="math inline">\(L_g\)</span> coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).</p>
-<p>It is calculated the following way: <span class="math inline">\(L_g = \frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}\)</span> where the notation is the same as for the RV function and <span class="math inline">\(\gamma_{1k}\)</span> denotes the first singular value of table k.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lg</span>(data[,SETS[[<span class="dv">1</span>]]], data[,SETS[[<span class="dv">2</span>]]])</code></pre></div>
-<pre><code>## [1] 0.9777692</code></pre>
-</div>
-<div id="lg_table-function" class="section level1">
-<h1>Lg_table Function</h1>
-<p>The Lg_table function is related to the Lg function in exactly the same way as the RV_table function is related to the RV function.<br />
-The Lg Table function returns a matrix of Lg Coefficients. The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where <span class="math inline">\(M_{ij}\)</span> is the Lg coefficient between Table <span class="math inline">\(i\)</span> and Table <span class="math inline">\(j\)</span>. Table <span class="math inline">\(i\)</span> is created by taking the <span class="math inline">\(i\)</span>-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lg_table</span>(<span class="dt">mfa =</span> mfa1, SETS[<span class="dv">1</span>:<span class="dv">4</span>])</code></pre></div>
-<pre><code>##           [,1]      [,2]      [,3]      [,4]
-## [1,] 1.0585802 0.9180402 0.9443864 0.7581931
-## [2,] 0.9180402 1.0573275 0.8507391 0.7928519
-## [3,] 0.9443864 0.8507391 1.1381478 0.8724386
-## [4,] 0.7581931 0.7928519 0.8724386 1.0501450</code></pre>
+<div id="lg_coefficient-function" class="section level1">
+<h1>Lg_Coefficient Function</h1>
+<p>The Lg_coefficient function takes as input two tables and returns a single value, called <span class="math inline">\(L_g\)</span> coefficient. The <span class="math inline">\(L_g\)</span> coefficient measures the richness of the common structure between the two tables: the larger the <span class="math inline">\(L_g\)</span> coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).</p>
+<p>It is calculated the following way: $L_g = <span class="math inline">\(\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}\)</span></p>
 </div>
 
 
