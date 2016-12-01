@@ -19,9 +19,9 @@ plot_partial_factor <- function(mfa, dims = 1:2, title = 'Partial Factor Scores'
   tables <- length(mfa$partialFactorScores)
   cols <- 5 # Number of columns in the grid
   rows <- tables / cols # Number of rows in the grid
-  par(mfrow = c(rows, cols)
-      , oma = c(4, 2, 4, 2) # Outer margin (b, r, u, l)
-      , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
+  par(mfrow = c(rows, cols), mar = c(1, 1, 1, 1))
+      # , oma = c(4, 2, 4, 2) # Outer margin (b, r, u, l)
+      # , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   ## min and max plotting dimensions
   pfs_combined <- do.call(rbind, mfa$partialFactorScores)

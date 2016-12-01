@@ -15,7 +15,7 @@ plot_compromise <- function(mfa, dims = 1:2, title = 'Common Factor Scores'){
   check_mfa(mfa)
   check_plot_dims(length(attributes(mfa)$sets), dims)
   
-  par(mfrow = c(1, 1), mar = c(1, 2, 1, 2))
+  par(mfrow = c(1, 1), mar = c(1, 1, 1, 1))
   
   color <- attributes(mfa)$color
   
