@@ -19,6 +19,10 @@ Open R Studio and setwd to the root folder (the folder that contains the Github 
 #install("mfa")
 #library(mfa)
 
+##after loading the library, change the working directory to the directory
+##of the package. In most cases the following line should suffice:
+#setwd("./mfa/")
+##the execute the following line to knit the vignette
 #devtools::build_vignettes()
 
 ```
@@ -152,7 +156,22 @@ The RV Table function takes as input an mfa object and a list which consists of 
 RV_table(mfa = mfa1, SETS[1:4])
 ```
 
-#Lg_Coefficient Function
-The Lg_coefficient function ... 
+#Lg Function
+The Lg function takes as input two tables and returns a single value, called $L_g$ coefficient. The $L_g$ coefficient measures the richness of the common structure between the two tables: the larger the $L_g$ coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).
+
+It is calculated the following way:
+$L_g = $\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$ 
+where the notation is the same as for the RV function and $\gamma_1k$ denotes the first singular value of table k. 
+
+```{r}
+Lg(data[,SETS[[1]]], data[,SETS[[2]]])
+```
+
+#Lg_table Function
+The Lg_table function is related to the Lg function in exactly the same way as the RV_table function is related to the RV function.  
+The Lg Table function returns a matrix of Lg Coefficients. 
+The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where $M_i_j$ is the Lg coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+
+
 
 

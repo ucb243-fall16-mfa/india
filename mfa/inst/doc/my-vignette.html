@@ -12,7 +12,7 @@
 
 <meta name="author" content="Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis" />
 
-<meta name="date" content="2016-11-30" />
+<meta name="date" content="2016-12-01" />
 
 <title>MFA Package Vignette</title>
 
@@ -70,11 +70,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">MFA Package Vignette</h1>
 <h4 class="author"><em>Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis</em></h4>
-<h4 class="date"><em>2016-11-30</em></h4>
+<h4 class="date"><em>2016-12-01</em></h4>
 
 
 
-<p>The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa() function, which performs multiple factor analysis on the given data. Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain amongst others factor scores and variable loadings. (Mention paper?)</p>
+<p>The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa() function, which performs multiple factor analysis on the given data. Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain amongst others factor scores and variable loadings. A thorough description of this can be found in WIREs Comput Stat 2013. doi: 10.1002/wics.1246.</p>
+<div id="installing-the-package" class="section level1">
+<h1>Installing the package</h1>
+<p>To install the package download the Github repository. Open R Studio and setwd to the root folder (the folder that contains the Github repository). Execute the following code to install the package and its vignette.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(devtools)</span>
+<span class="co">#install(&quot;mfa&quot;)</span>
+<span class="co">#library(mfa)</span>
+
+##after loading the library, change the working directory to the directory
+##of the package. In most cases the following line should suffice:
+<span class="co">#setwd(&quot;./mfa/&quot;)</span>
+##the execute the following line to knit the vignette
+<span class="co">#devtools::build_vignettes()</span></code></pre></div>
+</div>
 <div id="mfa-function" class="section level1">
 <h1>mfa Function</h1>
 <p>The mfa function takes data, sets, ncomps, center and scale as parameters. It returns an object of class mfa.</p>
@@ -157,7 +170,7 @@ mfa1</code></pre></div>
 <div id="contribution_obs_dim-function-contributions-of-an-observation-to-a-dimension" class="section level1">
 <h1>contribution_obs_dim Function (Contributions of an Observation to a Dimension)</h1>
 <p>The contribution_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.</p>
-<p><span class="math inline">\(ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}\)</span>, where <span class="math inline">\(\lambda_l\)</span> is the eigenvalue of dimension <span class="math inline">\(l\)</span>, <span class="math inline">\(m_i\)</span> is the mass of the <span class="math inline">\(i\)</span>-th dimension and <span class="math inline">\(f_{i,l}\)</span> is the factor score for the <span class="math inline">\(i\)</span>-th observation for the <span class="math inline">\(l\)</span>-th dimension. <span class="math inline">\(ctr_{j,l} = a_j * q_{j,l}\)</span> where <span class="math inline">\(a_j\)</span></p>
+<p><span class="math inline">\(ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}\)</span>, where <span class="math inline">\(\lambda_l\)</span> is the eigenvalue of dimension <span class="math inline">\(l\)</span>, <span class="math inline">\(m_i\)</span> is the mass of the <span class="math inline">\(i\)</span>-th dimension and <span class="math inline">\(f_{i,l}\)</span> is the factor score for the <span class="math inline">\(i\)</span>-th observation for the <span class="math inline">\(l\)</span>-th dimension.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contribution_obs_dim</span>(<span class="dt">mfa =</span> mfa1, <span class="dt">l_max =</span> <span class="dv">3</span>)</code></pre></div>
 <pre><code>##               [,1]         [,2]         [,3]
 ##  [1,] 0.0813778503 2.257373e-03 6.798932e-05
@@ -272,7 +285,8 @@ RV = <span class="math inline">\(\frac{trace(table1 \ table1^T) * trace(table2 \
 </div>
 <div id="lg_coefficient-function" class="section level1">
 <h1>Lg_Coefficient Function</h1>
-<p>The Lg_coefficient function …</p>
+<p>The Lg_coefficient function takes as input two tables and returns a single value, called <span class="math inline">\(L_g\)</span> coefficient. The <span class="math inline">\(L_g\)</span> coefficient measures the richness of the common structure between the two tables: the larger the <span class="math inline">\(L_g\)</span> coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).</p>
+<p>It is calculated the following way: $L_g = <span class="math inline">\(\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}\)</span></p>
 </div>
 
 
