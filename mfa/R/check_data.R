@@ -5,6 +5,7 @@
 #' @param sets - the blocks the data should be broken into
 #' @param ncomps - integer number of components to use
 #' @param weights - numeric vector of weights
+#' @param ids - character/numeric vector of sample id's
 #' @return boolean - TRUE if test passes
 check_data <- function(data, sets, ncomps, weights, ids){
     if(!is.data.frame(data) | is.matrix(data)){
