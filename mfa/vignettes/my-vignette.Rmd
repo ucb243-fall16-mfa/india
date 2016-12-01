@@ -88,6 +88,7 @@ The plot_partial_factor Function for mfa objects plots the partial factor scores
 ```{r}
 plot_partial_factor(mfa1)
 ```
+
 #plot_variable_loadings Function
 The plot_variable_loadings Function for mfa objects plots the variable loadings for each...
 ```{r}
