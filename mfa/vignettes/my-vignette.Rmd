@@ -88,7 +88,7 @@ The plot_partial_factor Function for mfa objects plots the partial factor scores
 ```{r}
 plot_partial_factor(mfa1)
 ```
-#plot_variable_loadings Functio
+#plot_variable_loadings Function
 The plot_variable_loadings Function for mfa objects plots the variable loadings for each...
 ```{r}
 plot_variable_loadings(mfa1)
@@ -99,7 +99,7 @@ plot_variable_loadings(mfa1)
 
 #Related Methods and Functions
 
-#summary_eigenvalues.mfa Function
+#summary_eigenvalues Function
 The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained. 
 ```{r}
 summary_eigenvalues(mfa1)
