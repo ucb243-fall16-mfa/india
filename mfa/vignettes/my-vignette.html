@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis" />
+
+<meta name="date" content="2016-12-01" />
+
+<title>MFA Package Vignette</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">MFA Package Vignette</h1>
+<h4 class="author"><em>Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis</em></h4>
+<h4 class="date"><em>2016-12-01</em></h4>
+
+
+
+<p>The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa() function, which performs multiple factor analysis on the given data. Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain amongst others factor scores and variable loadings. A thorough description of this can be found in WIREs Comput Stat 2013. doi: 10.1002/wics.1246.</p>
+<div id="installing-the-package" class="section level1">
+<h1>Installing the package</h1>
+<p>To install the package download the Github repository. Open R Studio and setwd to the root folder (the folder that contains the Github repository). Execute the following code to install the package and its vignette.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(devtools)</span>
+<span class="co">#install(&quot;mfa&quot;)</span>
+<span class="co">#library(mfa)</span>
+
+##after loading the library, change the working directory to the directory
+##of the package. In most cases the following line should suffice:
+<span class="co">#setwd(&quot;./mfa/&quot;)</span>
+##the execute the following line to knit the vignette
+<span class="co">#devtools::build_vignettes()</span></code></pre></div>
+</div>
+<div id="mfa-function" class="section level1">
+<h1>mfa Function</h1>
+<p>The mfa function takes data, sets, ncomps, center and scale as parameters. It returns an object of class mfa.</p>
+<p>The data parameter must either be a data.frame or matrix and contains all the data which will be analyzed through the multiple factor analysis.<br />
+Sets is a list, where each element of the list indicates either the column names or numbers out of which one smaller datatable will be formed. If for example column 1 to 3 corresponds to the observation of one expert, the first element of sets will be 1:3. ncomps is the number of factors / components that will be extracted. If left to default all factors will be extracted. Center is by default True and indicates whether centering in Step 1 (as outlined above) will be done. By default, each column is scaled so that the sum of its elements is zero. Scale is by default True and indicates whether scaling in Step 1 (as outlined above) will be done. By default, each column is scaled so that the sum of its squared elements is 1. For further information concerning centering and scaling refer to the help of the base scale function ?scale. Please note the different meanings of scale = TRUE between base package and mfa function. Whereas in the standard R function scale = TRUE means the sum of the squared values of each column add up to nrow(data) - 1 (sample SD = 1), here they add up to 1.</p>
+<p>The function returns an mfa object with attributes P, Q <span class="math inline">\(\lambda\)</span>, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues <span class="math inline">\(\lambda\)</span>, which are the singular values squared, <span class="math inline">\(\Delta^2\)</span>. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8 (how to cite the paper?).</p>
+</div>
+<div id="wine-data" class="section level1">
+<h1>Wine data</h1>
+<p>The wine data is described in <a href="https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf" class="uri">https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf</a> and can for example be found under <a href="https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/Final-project/data/" class="uri">https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/Final-project/data/</a> and will be used throughout the Vignette to provide examples.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mfa)
+data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/ucb-stat243/stat243-fall-2016/master/problem-sets/final-project/data/wines.csv&quot;</span>)
+SETS &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">6</span>),<span class="kw">c</span>(<span class="dv">7</span>:<span class="dv">12</span>), <span class="kw">c</span>(<span class="dv">13</span>:<span class="dv">18</span>),<span class="kw">c</span>(<span class="dv">19</span>:<span class="dv">23</span>),<span class="kw">c</span>(<span class="dv">24</span>:<span class="dv">29</span>),<span class="kw">c</span>(<span class="dv">30</span>:<span class="dv">34</span>),<span class="kw">c</span>(<span class="dv">35</span>:<span class="dv">38</span>),<span class="kw">c</span>(<span class="dv">39</span>:<span class="dv">44</span>),<span class="kw">c</span>(<span class="dv">45</span>:<span class="dv">49</span>),<span class="kw">c</span>(<span class="dv">50</span>:<span class="dv">53</span>))
+
+<span class="co">#remove the first row because it contains non-numerical values</span>
+data &lt;-<span class="st"> </span>data[,-<span class="dv">1</span>]
+mfa1 &lt;-<span class="st"> </span><span class="kw">mfa</span>(<span class="dt">data =</span> data, <span class="dt">sets =</span> SETS )
+
+mfa1</code></pre></div>
+<pre><code>## object: &quot;mfa&quot;
+## 
+## number of tables: 10 
+## Truncated Eigenvalues of GSVD: 0.1229254 
+## Variance Explained by first two eigenvalues: (61.2, 9.8) 
+## 
+## Truncated Factor Scores
+##  [1]  0.16325474  0.03262348 -0.45418702 -0.16586214 -0.12838880
+##  [6] -0.10813651  0.20466790  0.40775212  0.36852275 -0.75677932
+## [11]  0.51276640 -0.07623359</code></pre>
+</div>
+<div id="generic-methods" class="section level1">
+<h1>Generic Methods</h1>
+</div>
+<div id="print.mfa-function" class="section level1">
+<h1>print.mfa Function</h1>
+<p>The print.mfa function takes an mfa object as an input and returns a basic summary of it. This summary consists of the name of the object, the number of smaller tables which make up the entire dataset (i.e. the number of experts rating the wines), the eigenvalues of the mfa object, as well as the variance explained by the first 2 eigenvalues. Also given are the first 2 factor scores.</p>
+</div>
+<div id="plot.mfa-function" class="section level1">
+<h1>plot.mfa Function</h1>
+<p>The plot function for mfa objects automatically plots the Compromise, Partial Factor Scores and Variable Loadings, using the plot_compromise, plot_partial_factor and plot_variable_loadings functions. It can take a color argument as input, which should be a list of vectors. Each element of the vector denotes observations (e.g. rows) of the data table which will then be displayed in the same color.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#grid &lt;- par(mar = rep(2, 2))</span>
+<span class="co">#plot(mfa1)</span>
+<span class="co">#par(grid)</span></code></pre></div>
+</div>
+<div id="plot_compromise-function" class="section level1">
+<h1>plot_compromise Function</h1>
+<p>The plot_compromise Function for mfa objects plots the factor scores (factor scores and compromise are used interchangeably here) of the object.</p>
+</div>
+<div id="plot_partial_factor-function" class="section level1">
+<h1>plot_partial_factor Function</h1>
+<p>The plot_partial_factor Function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.</p>
+</div>
+<div id="plot_variable_loadings-functio" class="section level1">
+<h1>plot_variable_loadings Functio</h1>
+<p>The plot_variable_loadings Function for mfa objects plots the variable loadings for each…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#plot_compromise(mfa1)</span>
+<span class="co">#plot_partial_factor(mfa1)</span>
+<span class="co">#plot_variable_loadings(mfa1)</span></code></pre></div>
+</div>
+<div id="related-methods-and-functions" class="section level1">
+<h1>Related Methods and Functions</h1>
+</div>
+<div id="summary_eigenvalues.mfa-function" class="section level1">
+<h1>summary_eigenvalues.mfa Function</h1>
+<p>The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary_eigenvalues</span>(mfa1)</code></pre></div>
+<pre><code>##                Comp 1 Comp 2 Comp 3 Comp 4 Comp 5 Comp 6 Comp 7 Comp 8
+## SingularValue    0.88   0.35   0.30   0.28   0.24   0.20   0.18   0.16
+## Eigenvalue       0.77   0.12   0.09   0.08   0.06   0.04   0.03   0.02
+## CumEigVal        0.77   0.89   0.98   1.06   1.12   1.16   1.19   1.21
+## PercentInertia  61.23   9.77   7.21   6.04   4.74   3.12   2.46   1.98
+## CumPercIner     61.23  71.00  78.21  84.25  88.99  92.11  94.57  96.55
+##                Comp 9 Comp 10 Comp 11 Comp 12
+## SingularValue    0.14    0.12    0.11    0.00
+## Eigenvalue       0.02    0.01    0.01    0.00
+## CumEigVal        1.23    1.25    1.26    1.26
+## PercentInertia   1.48    1.07    0.90    0.00
+## CumPercIner     98.03   99.10  100.00  100.00</code></pre>
+</div>
+<div id="contribution_obs_dim-function-contribution-of-an-observation-to-a-dimension" class="section level1">
+<h1>contribution_obs_dim Function (Contribution of an Observation to a Dimension)</h1>
+<p>The contribution_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.</p>
+<p><span class="math inline">\(ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}\)</span>, where <span class="math inline">\(\lambda_l\)</span> is the eigenvalue of dimension <span class="math inline">\(l\)</span>, <span class="math inline">\(m_i\)</span> is the mass of the <span class="math inline">\(i\)</span>-th dimension and <span class="math inline">\(f_{i,l}\)</span> is the factor score for the <span class="math inline">\(i\)</span>-th observation for the <span class="math inline">\(l\)</span>-th dimension.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contribution_obs_dim</span>(<span class="dt">mfa =</span> mfa1, <span class="dt">l_max =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code>##               [,1]         [,2]         [,3]
+##  [1,] 0.0813778503 2.257373e-03 6.798932e-05
+##  [2,] 0.0554145701 9.014307e-05 2.217802e-03
+##  [3,] 0.0490509810 1.747194e-02 2.731099e-06
+##  [4,] 0.1052952386 2.330056e-03 4.235747e-03
+##  [5,] 0.1596095812 1.396131e-03 1.253187e-03
+##  [6,] 0.1353245029 9.904132e-04 1.160175e-02
+##  [7,] 0.0553347991 3.547898e-03 5.429009e-03
+##  [8,] 0.0725231339 1.408200e-02 1.221250e-02
+##  [9,] 0.0379021631 1.150271e-02 1.588812e-02
+## [10,] 0.0004533421 4.850765e-02 1.753884e-04
+## [11,] 0.0191992483 2.226952e-02 1.357930e-02
+## [12,] 0.0113808363 4.922260e-04 2.553217e-02</code></pre>
+</div>
+<div id="contribution_var_dim-functioncontribution-of-a-variable-to-a-dimension" class="section level1">
+<h1>contribution_var_dim Function(Contribution of a Variable to a Dimension)</h1>
+<p>The contribution_var_dim function operates on an mfa object, it returns the contribution of a variable j on a dimension l. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry j,l is:</p>
+<p><span class="math inline">\(ctr_{j,l} = a_j * q_{j,l}\)</span> where <span class="math inline">\(a_j\)</span> is the <span class="math inline">\(\alpha\)</span> weight of the first variable (the inverse of the first singular value of the table from Step 1 of the mfa function), and <span class="math inline">\(q_{j,l}\)</span> is the loading of the <span class="math inline">\(j\)</span>th variable for the <span class="math inline">\(l\)</span>th dimension.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contribution_var_dim</span>(<span class="dt">mfa =</span> mfa1, <span class="dt">l_max =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>##           [,1]       [,2]
+## V1   20.885090 24.4127525
+## V2   17.122101 14.8423670
+## V3   16.287021 37.7705750
+## V4   14.010101  8.1261629
+## V5   19.756090  6.2486776
+## V6   13.072286  4.0016292
+## V1.1 21.079519  8.0134103
+## V2.1 20.939521  7.5537268
+## V3.1 17.040115  9.5515864
+## V4.1 15.655787 13.7863619
+## V7   13.560667  3.0622126
+## V8   11.782231 26.5269278
+## V1.2 25.524942 15.0179325
+## V2.2  5.068117 14.2660195
+## V3.2 18.365896 39.4752290
+## V4.2 11.364582 36.6475665
+## V9   21.123891 24.2895797
+## V10  19.603689 21.9940534
+## V1.3 26.790671  1.8387181
+## V2.3 18.532210 33.9969057
+## V3.3 25.091414  7.8068236
+## V4.3 14.490456  1.1734365
+## V8.1 11.512654  3.7654958
+## V1.4 26.854877 12.3396905
+## V2.4 13.853603 18.9701913
+## V3.4 22.096088 20.4039131
+## V4.4  4.676222  5.3026532
+## V11  20.491117  6.3688638
+## V12   9.550818  0.1130784
+## V1.5 27.565988 13.9754014
+## V2.5 23.281793 22.7699166
+## V3.5 21.198041 32.4511882
+## V4.5 16.067858  0.2814756
+## V13  12.655924 34.9714120
+## V1.6 31.493009 60.0888967
+## V2.6 25.284619 69.9727397
+## V3.6 31.880875 35.1069808
+## V4.6 13.535705 58.9274552
+## V1.7 20.732071 26.0526390
+## V2.7 16.639111 38.5486198
+## V3.7 15.092809 14.5855892
+## V4.7  5.220090 13.0133535
+## V14  22.299225 18.5071285
+## V5.1 15.575938 23.3935549
+## V1.8 24.268879 15.3339732
+## V2.8 14.499905 12.8868726
+## V3.8 21.709664 13.4312018
+## V4.8 16.545543  1.8325871
+## V15  23.115940  9.3334395
+## V1.9 32.113559  1.9888297
+## V2.9 23.179258 21.1923560
+## V3.9 25.270059 10.7862080
+## V4.9 24.592358 22.9016404</code></pre>
+</div>
+<div id="contribution_table_dim-functioncontribution-of-a-table-to-a-dimension" class="section level1">
+<h1>contribution_table_dim Function(Contribution of a Table to a Dimension)</h1>
+<p>The contribution_table_dim function operates on an mfa Object, it returns the contribution of a Table <span class="math inline">\(k\)</span> on a Dimension <span class="math inline">\(l\)</span>. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is:</p>
+<p><span class="math inline">\(ctr_{kl} = \sum_i^{J_k} ctr_{jl}\)</span> where <span class="math inline">\(ctr_{jl}\)</span> is the contribution of a variable <span class="math inline">\(j\)</span> to a dimension <span class="math inline">\(l\)</span> and the sum goes over all variables in Table <span class="math inline">\(k\)</span>. The contributions of a table <span class="math inline">\(k\)</span> to a dimension <span class="math inline">\(l\)</span> is therefore just the sum of the contributions of the variables comprising the table to the dimension <span class="math inline">\(l\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">contribution_table_dim</span>(<span class="dt">mfa =</span> mfa1, <span class="dt">l_max =</span> <span class="dv">4</span>)</code></pre></div>
+<pre><code>##             [,1]       [,2]       [,3]       [,4]
+##  [1,] 0.10113269 0.09540216 0.09905229 0.06536089
+##  [2,] 0.10005784 0.06849423 0.12251404 0.03382958
+##  [3,] 0.10105112 0.15169038 0.06291732 0.19875141
+##  [4,] 0.09641740 0.04858138 0.07429261 0.10079654
+##  [5,] 0.09752272 0.06349839 0.24773464 0.26429146
+##  [6,] 0.10076960 0.10444939 0.02967381 0.05234504
+##  [7,] 0.10219421 0.22409607 0.05367775 0.13045847
+##  [8,] 0.09555924 0.13410088 0.16540516 0.12833199
+##  [9,] 0.10013993 0.05281807 0.08998547 0.00555043
+## [10,] 0.10515523 0.05686903 0.05474691 0.02028419</code></pre>
+</div>
+<div id="escoufiers-rv-coefficient" class="section level1">
+<h1>Escoufier’s RV Coefficient</h1>
+</div>
+<div id="rv-function" class="section level1">
+<h1>RV Function</h1>
+<p>The RV function takes as input two tables and returns a single value, called the Escoufier’s RV Coefficient. The RV function analyzes the structure between two tables. It can be seen as the multivariate generalization of the squared Pearson Correlation Coefficient. Given two tables as an input it returns the scalar RV.<br />
+RV = <span class="math inline">\(\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\sqrt(trace(table1 \ table1^T) * (table1 \ table1^T) * trace((table2 \ table2^T) * (table2 \ table2^T)))}\)</span> where the Root is taken with respect to the entire denominator and <span class="math inline">\(*\)</span> as well as &quot; &quot; denote the normal Matrix Multiplication.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">RV</span>(data[,SETS[[<span class="dv">1</span>]]], data[,SETS[[<span class="dv">2</span>]]])</code></pre></div>
+<pre><code>## [1] 0.9701797</code></pre>
+</div>
+<div id="rv_table-function" class="section level1">
+<h1>RV_Table Function</h1>
+<p>The RV Table function returns a matrix of RV Coefficients. The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where <span class="math inline">\(M_{ij}\)</span> is the RV coefficient between Table <span class="math inline">\(i\)</span> and Table <span class="math inline">\(j\)</span>. Table <span class="math inline">\(i\)</span> is created by taking the <span class="math inline">\(i\)</span>-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">RV_table</span>(<span class="dt">mfa =</span> mfa1, SETS[<span class="dv">1</span>:<span class="dv">4</span>])</code></pre></div>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]
+## [1,] 1.0000000 0.8677509 0.8603765 0.7191066
+## [2,] 0.8677509 1.0000000 0.7755188 0.7524241
+## [3,] 0.8603765 0.7755188 1.0000000 0.7980148
+## [4,] 0.7191066 0.7524241 0.7980148 1.0000000</code></pre>
+</div>
+<div id="lg-function" class="section level1">
+<h1>Lg Function</h1>
+<p>The Lg function takes as input two tables and returns a single value, called <span class="math inline">\(L_g\)</span> coefficient. The <span class="math inline">\(L_g\)</span> coefficient measures the richness of the common structure between the two tables: the larger the <span class="math inline">\(L_g\)</span> coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).</p>
+<p>It is calculated the following way: <span class="math inline">\(L_g = \frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}\)</span> where the notation is the same as for the RV function and <span class="math inline">\(\gamma_{1k}\)</span> denotes the first singular value of table k.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lg</span>(data[,SETS[[<span class="dv">1</span>]]], data[,SETS[[<span class="dv">2</span>]]])</code></pre></div>
+<pre><code>## [1] 0.9777692</code></pre>
+</div>
+<div id="lg_table-function" class="section level1">
+<h1>Lg_table Function</h1>
+<p>The Lg_table function is related to the Lg function in exactly the same way as the RV_table function is related to the RV function.<br />
+The Lg Table function returns a matrix of Lg Coefficients. The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where <span class="math inline">\(M_{ij}\)</span> is the Lg coefficient between Table <span class="math inline">\(i\)</span> and Table <span class="math inline">\(j\)</span>. Table <span class="math inline">\(i\)</span> is created by taking the <span class="math inline">\(i\)</span>-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lg_table</span>(<span class="dt">mfa =</span> mfa1, SETS[<span class="dv">1</span>:<span class="dv">4</span>])</code></pre></div>
+<pre><code>##           [,1]      [,2]      [,3]      [,4]
+## [1,] 1.0585802 0.9180402 0.9443864 0.7581931
+## [2,] 0.9180402 1.0573275 0.8507391 0.7928519
+## [3,] 0.9443864 0.8507391 1.1381478 0.8724386
+## [4,] 0.7581931 0.7928519 0.8724386 1.0501450</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -97,13 +97,13 @@ The plot_variable_loadings Function for mfa objects plots the variable loadings 
 #Related Methods and Functions
 
 #summary_eigenvalues.mfa Function
-The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the /% of inertia explained, and the cumulative /% of inertia explained. 
+The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained. 
 ```{r}
 summary_eigenvalues(mfa1)
 ```
 
 
-#contribution_obs_dim Function (Contributions of an Observation to a Dimension)
+#contribution_obs_dim Function (Contribution of an Observation to a Dimension)
 The contribution_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.
 
 $ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}$, where $\lambda_l$ is the eigenvalue of dimension $l$, $m_i$ is the mass of the $i$-th dimension and $f_{i,l}$ is the factor score for the $i$-th observation for the $l$-th dimension.
@@ -128,7 +128,7 @@ contribution_var_dim(mfa = mfa1, l_max = 2)
 #contribution_table_dim Function(Contribution of a Table to a Dimension)
 The contribution_table_dim function operates on an mfa Object, it returns the contribution of a Table $k$ on a Dimension $l$. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is: 
  
-$ctr_k_l = \sum_i^{J_k} ctr_j_l$ where $ctr_j_l$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variables in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
+$ctr_{kl} = \sum_i^{J_k} ctr_{jl}$ where $ctr_{jl}$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variables in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
 
 ```{r}
 contribution_table_dim(mfa = mfa1, l_max = 4)
@@ -150,7 +150,7 @@ RV(data[,SETS[[1]]], data[,SETS[[2]]])
 #RV_Table Function
 
 The RV Table function returns a matrix of RV Coefficients. 
-The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_i_j$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_{ij}$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
 
 ```{r}
 RV_table(mfa = mfa1, SETS[1:4])
@@ -160,8 +160,8 @@ RV_table(mfa = mfa1, SETS[1:4])
 The Lg function takes as input two tables and returns a single value, called $L_g$ coefficient. The $L_g$ coefficient measures the richness of the common structure between the two tables: the larger the $L_g$ coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).
 
 It is calculated the following way:
-$L_g = $\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$ 
-where the notation is the same as for the RV function and $\gamma_1k$ denotes the first singular value of table k. 
+$L_g = \frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$ 
+where the notation is the same as for the RV function and $\gamma_{1k}$ denotes the first singular value of table k. 
 
 ```{r}
 Lg(data[,SETS[[1]]], data[,SETS[[2]]])
@@ -170,7 +170,12 @@ Lg(data[,SETS[[1]]], data[,SETS[[2]]])
 #Lg_table Function
 The Lg_table function is related to the Lg function in exactly the same way as the RV_table function is related to the RV function.  
 The Lg Table function returns a matrix of Lg Coefficients. 
-The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where $M_i_j$ is the Lg coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where $M_{ij}$ is the Lg coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
+
+```{r}
+Lg_table(mfa = mfa1, SETS[1:4])
+
+```
 
 
 
