@@ -70,25 +70,28 @@ The print.mfa function takes an mfa object as an input and returns a basic summa
 The plot function for mfa objects automatically plots the Compromise, Partial Factor Scores and Variable Loadings, using the plot_compromise, plot_partial_factor and plot_variable_loadings functions. It can take a color argument as input, which should be a list of vectors. Each element of the vector denotes observations (e.g. rows) of the data table which will then be displayed in the same color.
 
 ```{r}
-#grid <- par(mar = rep(2, 2))
-#plot(mfa1)
-#par(grid)
+plot(mfa1)
 ```
 
 
 #plot_compromise Function
 The plot_compromise Function for mfa objects plots the factor scores (factor scores and compromise are used interchangeably here) of the object.
 
+```{r}
+plot_compromise(mfa1)
+
+```
+
 #plot_partial_factor Function
 The plot_partial_factor Function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.
 
+```{r}
+plot_partial_factor(mfa1)
+```
 #plot_variable_loadings Functio
 The plot_variable_loadings Function for mfa objects plots the variable loadings for each...
 ```{r}
-#plot_compromise(mfa1)
-#plot_partial_factor(mfa1)
-#plot_variable_loadings(mfa1)
-
+plot_variable_loadings(mfa1)
 ```
 
 
