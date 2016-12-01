@@ -22,7 +22,7 @@ Open R Studio and setwd to the root folder (the folder that contains the Github 
 ##after loading the library, change the working directory to the directory
 ##of the package. In most cases the following line should suffice:
 #setwd("./mfa/")
-##the execute the following line to knit the vignette
+##execute the following line to knit the vignette
 #devtools::build_vignettes()
 
 ```
