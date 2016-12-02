@@ -8,7 +8,7 @@ This description is from the paper that this project is based upon: [Multiple fa
 
 ### Contents
 
-* [R Code](/master/mfa/R)
+* [R Code](mfa/R)
 * [Unit Tests](mfa/tests)
 * [Slides](slides/slides.md)
 * [Vignettes](/mfa/vignettes)
@@ -17,21 +17,10 @@ This description is from the paper that this project is based upon: [Multiple fa
 
 ### Quick Start Guide
 
-**In Git Bash**
-
-```
-git clone https://github.com/fussballball/stat243FinalProject.git
-```
-
-**In R**
-
-```R
-setwd('INSERT_PATH_HERE/stat243FinalProject')
-library(devtools)
-install('mfa')
-```
-
-
+1. Clone the repository of [download a zip file](https://github.com/fussballball/stat243FinalProject/archive/master.zip)
+2. Extract the zip file (If necessary)
+3. Make the repository your working directory in R (i.e. `setwd('INSERT_PATH_HERE/stat243FinalProject')`)
+4. Load the `devtools` library and run `devtools::install('mfa')`
 
 ### Package Developers
 
@@ -39,8 +28,6 @@ install('mfa')
 * Josiah Davis
 * Yanli Fan
 * Yoni Ackerman
-
-
 
 
 ### References
