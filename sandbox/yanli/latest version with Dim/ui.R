@@ -1,4 +1,3 @@
-
 fluidPage(
     titlePanel(h1("Multiple Factor Analysis Result",
                   style = "font-family: 'chalkboard';

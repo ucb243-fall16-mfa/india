@@ -1,6 +1,3 @@
-
-## load the object to the environment
-
 function(input, output, session) {
   
   # define the output plot depending on the selection of the mfa object and the 
@@ -20,7 +17,6 @@ function(input, output, session) {
 
       # the content in the environment is the mfa object.
       object <- ls(env)
-      print(class(object))
       mfa1 <- get(object[1], env)
       sets <- as.numeric(length(mfa1$partialFactorScores))
 
