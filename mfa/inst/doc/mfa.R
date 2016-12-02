@@ -8,11 +8,12 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 6, fig.align 
 #                           force_deps = FALSE)
 
 ## ------------------------------------------------------------------------
+wine[,1:15]
+
+## ------------------------------------------------------------------------
 library(mfa)
-setwd('/Users/josiahdavis/Documents/LearningDataScience/Berkeley/STAT243/stat243FinalProject')
-data <- read.csv('../project/wines.csv')
 SETS <- list(2:7, 8:13, 14:19, 20:24, 25:30, 31:35, 36:39, 40:45 , 46:50, 51:54)
-mfa1 <- mfa(data = data, sets = SETS)
+mfa1 <- mfa(data = wine, sets = SETS)
 mfa1
 
 ## ------------------------------------------------------------------------
@@ -44,13 +45,13 @@ contribution_var_dim(mfa = mfa1, l_max = 2)
 contribution_table_dim(mfa = mfa1, l_max = 4)
 
 ## ------------------------------------------------------------------------
-RV(data[,SETS[[1]]], data[,SETS[[2]]])
+RV(wine[,SETS[[1]]], wine[,SETS[[2]]])
 
 ## ------------------------------------------------------------------------
 RV_table(mfa = mfa1, SETS[1:4])
 
 ## ------------------------------------------------------------------------
-Lg(data[,SETS[[1]]], data[,SETS[[2]]])
+Lg(wine[,SETS[[1]]], wine[,SETS[[2]]])
 
 ## ------------------------------------------------------------------------
 Lg_table(mfa = mfa1, SETS[1:4])

@@ -93,12 +93,25 @@ Sets is a list, where each element of the list indicates either the column names
 </div>
 <div id="wine-data" class="section level1">
 <h1>Wine data</h1>
-<p>The wine data is described in <a href="https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf" class="uri">https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf</a> and can for example be found under <a href="https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/Final-project/data/" class="uri">https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/Final-project/data/</a> and will be used throughout the Vignette to provide examples.</p>
+<p>The wine data is described in <a href="https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf" class="uri">https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf</a> and is loaded with the package to be used throughout the Vignette.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wine[,<span class="dv">1</span>:<span class="dv">15</span>]
+<span class="co">#&gt;     ID V1 V2 V3 V4 V5 V6 V1.1 V2.1 V3.1 V4.1 V7 V8 V1.2 V2.2</span>
+<span class="co">#&gt; 1  NZ1  8  6  7  4  1  6    8    6    8    3  7  5    8    6</span>
+<span class="co">#&gt; 2  NZ2  7  5  8  1  2  8    6    5    6    3  7  7    8    7</span>
+<span class="co">#&gt; 3  NZ3  6  5  6  5  3  4    6    6    6    5  8  7    8    7</span>
+<span class="co">#&gt; 4  NZ4  9  6  8  4  3  5    8    6    8    4  6  6    8    2</span>
+<span class="co">#&gt; 5  FR1  2  2  2  8  7  3    2    3    1    7  4  3    3    4</span>
+<span class="co">#&gt; 6  FR2  3  4  4  9  6  1    4    3    4    9  3  5    4    3</span>
+<span class="co">#&gt; 7  FR3  5  3  5  4  8  3    3    3    2    7  4  4    5    4</span>
+<span class="co">#&gt; 8  FR4  5  2  4  8  7  4    4    3    5    5  3  3    6    3</span>
+<span class="co">#&gt; 9  CA1  8  6  8  4  4  7    8    6    9    5  5  6    8    5</span>
+<span class="co">#&gt; 10 CA2  4  6  2  5  3  4    5    5    5    6  5  8    5    5</span>
+<span class="co">#&gt; 11 CA3  8  4  8  1  3  3    8    4    8    3  7  7    8    3</span>
+<span class="co">#&gt; 12 CA4  5  3  6  4  4  2    5    3    7    4  8  5    5    4</span></code></pre></div>
+<p>Rows correspond to different variaties of Souvignon Blanc (i.e., white wine), columns correspond to ratings of the wine along various dimensions of taste (e.g., mineral, passion fruit, cat pee) given by 10 different wine experts.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mfa)
-<span class="kw">setwd</span>(<span class="st">'/Users/josiahdavis/Documents/LearningDataScience/Berkeley/STAT243/stat243FinalProject'</span>)
-data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">'../project/wines.csv'</span>)
 SETS &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">2</span>:<span class="dv">7</span>, <span class="dv">8</span>:<span class="dv">13</span>, <span class="dv">14</span>:<span class="dv">19</span>, <span class="dv">20</span>:<span class="dv">24</span>, <span class="dv">25</span>:<span class="dv">30</span>, <span class="dv">31</span>:<span class="dv">35</span>, <span class="dv">36</span>:<span class="dv">39</span>, <span class="dv">40</span>:<span class="dv">45</span> , <span class="dv">46</span>:<span class="dv">50</span>, <span class="dv">51</span>:<span class="dv">54</span>)
-mfa1 &lt;-<span class="st"> </span><span class="kw">mfa</span>(<span class="dt">data =</span> data, <span class="dt">sets =</span> SETS)
+mfa1 &lt;-<span class="st"> </span><span class="kw">mfa</span>(<span class="dt">data =</span> wine, <span class="dt">sets =</span> SETS)
 mfa1
 <span class="co">#&gt; object: &quot;mfa&quot;</span>
 <span class="co">#&gt; </span>
@@ -266,7 +279,7 @@ mfa1
 <h1><code>RV()</code></h1>
 <p>The RV function takes as input two tables and returns a single value, called the Escoufier’s RV Coefficient. The RV function analyzes the structure between two tables. It can be seen as the multivariate generalization of the squared Pearson Correlation Coefficient. Given two tables as an input it returns the scalar <span class="math inline">\(R_V\)</span>.<br />
 <span class="math inline">\(R_{Vk,k'}=\frac{trace(X_{[k]} X_{[k]}^T) * trace(X_{[k']} X_{[k']}^T)}{\sqrt(trace[(X_{[k]} X_{[k]}^T) * (X_{[k]} X_{[k]}^T)] * trace[(X_{[k']} X_{[k']}^T) * (X_{[k']} X_{[k']}^T)])}\)</span> where the Root is taken with respect to the entire denominator and <span class="math inline">\(*\)</span> as well as &quot; &quot; denote the normal Matrix Multiplication.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">RV</span>(data[,SETS[[<span class="dv">1</span>]]], data[,SETS[[<span class="dv">2</span>]]])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">RV</span>(wine[,SETS[[<span class="dv">1</span>]]], wine[,SETS[[<span class="dv">2</span>]]])
 <span class="co">#&gt; [1] 0.9701797</span></code></pre></div>
 </div>
 <div id="rv_table" class="section level1">
@@ -283,7 +296,7 @@ mfa1
 <h1><code>Lg()</code></h1>
 <p>The Lg function takes as input two tables and returns a single value, called <span class="math inline">\(L_g\)</span> coefficient. The <span class="math inline">\(L_g\)</span> coefficient measures the richness of the common structure between the two tables: the larger the <span class="math inline">\(L_g\)</span> coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).</p>
 <p>It is calculated the following way: <span class="math inline">\(L_g = \frac{trace(X_1 X_1^T) trace(X_2 X_2^T)}{\gamma_{11}^2 * \gamma_{12}^2}\)</span> where the notation is the same as for the RV function and <span class="math inline">\(\gamma_{1k}\)</span> denotes the first singular value of table k.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lg</span>(data[,SETS[[<span class="dv">1</span>]]], data[,SETS[[<span class="dv">2</span>]]])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lg</span>(wine[,SETS[[<span class="dv">1</span>]]], wine[,SETS[[<span class="dv">2</span>]]])
 <span class="co">#&gt; [1] 0.9777692</span></code></pre></div>
 </div>
 <div id="lg_table" class="section level1">

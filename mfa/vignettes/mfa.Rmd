@@ -40,14 +40,18 @@ For further information concerning centering and scaling refer to the help of th
 The function returns an mfa object with attributes P, Q $\lambda$, F, Fk, where P and Q are the left repsectively right singular values resulting from the singular value decomposition as outlined in Step 2 above. Also returned is the vector of Eigenvalues $\lambda$, which are the singular values squared, $\Delta^2$. The common factor scores F, as well as the partial factor scores Fk are also returned. For details on their computation see WIREs Comput Stat 2013. doi: 10.1002/wics.1246 pp 8.
 
 #Wine data
-The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and can for example be found under https://github.com/ucb-stat243/stat243-fall-2016/tree/master/problem-sets/Final-project/data/ and will be used throughout the Vignette to provide examples.
+The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2013.pdf and is loaded with the package to be used throughout the Vignette.
+
+```{r}
+wine[,1:15]
+```
+
+Rows correspond to different variaties of Souvignon Blanc (i.e., white wine), columns correspond to ratings of the wine along various dimensions of taste (e.g., mineral, passion fruit, cat pee) given by 10 different wine experts.
 
 ```{r}
 library(mfa)
-setwd('/Users/josiahdavis/Documents/LearningDataScience/Berkeley/STAT243/stat243FinalProject')
-data <- read.csv('../project/wines.csv')
 SETS <- list(2:7, 8:13, 14:19, 20:24, 25:30, 31:35, 36:39, 40:45 , 46:50, 51:54)
-mfa1 <- mfa(data = data, sets = SETS)
+mfa1 <- mfa(data = wine, sets = SETS)
 mfa1
 ```
 
@@ -138,7 +142,7 @@ Given two tables as an input it returns the scalar $R_V$.
 $R_{Vk,k'}=\frac{trace(X_{[k]} X_{[k]}^T) * trace(X_{[k']} X_{[k']}^T)}{\sqrt(trace[(X_{[k]} X_{[k]}^T) * (X_{[k]} X_{[k]}^T)] * trace[(X_{[k']} X_{[k']}^T) * (X_{[k']} X_{[k']}^T)])}$ where the Root is taken with respect to the entire denominator and $*$ as well as " " denote the normal Matrix Multiplication.
 
 ```{r}
-RV(data[,SETS[[1]]], data[,SETS[[2]]])
+RV(wine[,SETS[[1]]], wine[,SETS[[2]]])
 ```
 
 
@@ -159,7 +163,7 @@ $L_g = \frac{trace(X_1 X_1^T)  trace(X_2 X_2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$
 where the notation is the same as for the RV function and $\gamma_{1k}$ denotes the first singular value of table k. 
 
 ```{r}
-Lg(data[,SETS[[1]]], data[,SETS[[2]]])
+Lg(wine[,SETS[[1]]], wine[,SETS[[2]]])
 ```
 
 # `Lg_table()`
