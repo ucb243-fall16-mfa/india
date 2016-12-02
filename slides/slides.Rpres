@@ -190,6 +190,9 @@ Available Methods
 |  `summary_eigenvalues()` |  Basic information about the eigenvalues  |
 |  `RV()` | Similarity between two tables  |
 |  `RV_table()` | Simularity between multiples tables  |
+|  `Lg()` | Lg coefficient between two numeric tables  |
+|  `Lg_table()` | A matrix of Lg scores for all the tables  |
+|  `boostrap()` | Boostrap approximation for the compromise scores  |
 
 ========================================================
 <span style="position: absolute; font-size: 70px;
