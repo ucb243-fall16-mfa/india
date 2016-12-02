@@ -1,51 +1,38 @@
-# how to let user to define sets
-
-library(shiny)
-
-function(input, output) {
+function(input, output, session) {
   
-  # this commented part are the codes could be considered for openning the mfa 
-  # object file(currently we are using the mfa object available in the global 
-  # environment)
-  
-  #  output$ui <- renderUI({
-  #    inFile <- input$file
-  #    if (is.null(inFile))
-  #      return(NULL)
-  # open file
-     
+  # install the package from github. If installed locally, sometimes there would 
+  # be error using some functions.
+  devtools::install_github("fussballball/stat243FinalProject/mfa", 
+                           force_deps = FALSE)
   
   
-  # source all the mfa functions and methods, can replace with calling the mfa 
-  # package after it's available. 
-  
-  for( f in list.files(paste0("/Users/yanlifan/Desktop/STAT243/Final Project/",
-                              "stat243FinalProject/mfa/R"), pattern = "plot", 
-                       full.names = TRUE)) {
-    source(f)
-  }
-  
-  # Depending on input$input_type, we'll creat the plot user demanded.
-    output$plot <- renderPlot({
-      inFile <- input$file
-      
-      if (is.null(inFile))
-        return(NULL)
-      read.csv(inFile$datapath, header=input$header, sep=input$sep, 
-               quote=input$quote)
-      #mfa1 <- read.csv(inFile$file) 
-      if(input$select == "Eigenvalues"){
-        barplot(mfa1$eigenValues,
-                            las = 1,
-                            main="Barplot of Eigenvalues",
-                            ylab="Eigenvalues",
-                            xlab="");
-      }else if (input$select == "Variable loadings") {
-        plot_variable_loadings.mfa(mfa1)
-      }else if (input$select == "Common factor scores") {
-        plot_compromise(mfa1)
-      }else if (input$select == "Partial factors scores") {
-        plot_partial_factor(mfa1)
-      }
-    })
+  output$plot <- renderPlot({
+    inFile <- input$file1
+    
+    if (is.null(inFile)){
+      return(NULL)
+    }
+    
+    print(inFile$datapath)
+    env_fn <- reactiveFileReader(1000, session, inFile$datapath, LoadToEnvironment)
+    env <- env_fn()
+    contents <- ls(env)
+    mfa1 <- get(contents[1], env)
+    
+    # Depending on input$input_type, we'll creat the plot user demanded.
+    if(input$select == "Eigenvalues"){
+      barplot(mfa1$lambda,
+              las = 1,
+              main="Barplot of Eigenvalues",
+              ylab="Eigenvalues",
+              xlab="");
+    }else if (input$select == "Variable loadings") {
+      plot_variable_loadings(mfa1)
+    }else if (input$select == "Common factor scores") {
+      plot_compromise(mfa1)
+    }else if (input$select == "Partial factors scores") {
+      plot_partial_factor(mfa1)
+    }
+    
+  })
 }
