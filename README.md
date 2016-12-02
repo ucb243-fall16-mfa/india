@@ -8,11 +8,12 @@ This description is from the paper that this project is based upon: [Multiple fa
 
 ### Contents
 
-* [R Code](https://github.com/fussballball/stat243FinalProject/tree/master/mfa/R)
-* [Unit Tests](https://github.com/fussballball/stat243FinalProject/tree/master/mfa/tests)
-* [Slides](https://github.com/fussballball/stat243FinalProject/blob/master/slides/slides.md)
-* [Vignettes](https://github.com/fussballball/stat243FinalProject/tree/master/mfa/vignettes)
+* [R Code](/master/mfa/R)
+* [Unit Tests](mfa/tests)
+* [Slides](slides/slides.md)
+* [Vignettes](/mfa/vignettes)
 * [Shiny](https://mfashinyapp.shinyapps.io/MFA_Shiny_App/)
+* [License](./LICENSE.txt)
 
 ### Quick Start Guide
 
@@ -32,12 +33,13 @@ install('mfa')
 
 
 
-### Authors
+### Package Developers
 
 * Dario Cantore
 * Josiah Davis
 * Yanli Fan
 * Yoni Ackerman
+
 
 
 
