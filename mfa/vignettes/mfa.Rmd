@@ -1,5 +1,5 @@
 ---
-title: "MFA Package Vignette"
+title: "Multiple Factor Analysis"
 author: "Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
