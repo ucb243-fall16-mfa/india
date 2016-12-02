@@ -1,10 +1,10 @@
 ---
-title: "Multiple Factor Analysis"
+title: "Multiple Factor Analysis in R"
 author: "Yanli Fan, Jonathan Ackerman, Dario Cantore, Josiah Davis"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{mfa Vignette}
+  %\VignetteIndexEntry{Introduction to mfa}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
