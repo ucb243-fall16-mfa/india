@@ -7,7 +7,7 @@
 check_center(center)
 }
 \arguments{
-\item{center}{boolean}
+\item{center}{boolean or numeric vector}
 }
 \value{
 boolean - does the check pass?

@@ -4,10 +4,10 @@
 \alias{plot.mfa}
 \title{plot}
 \usage{
-\method{plot}{mfa}(mfa)
+\method{plot}{mfa}(mfa, dims = 1:2)
 }
 \arguments{
-\item{x}{- the mfa object}
+\item{mfa}{- the mfa object}
 }
 \value{
 a three plots with the projection of each observation onto

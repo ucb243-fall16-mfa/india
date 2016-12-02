@@ -4,10 +4,12 @@
 \alias{plot_partial_factor}
 \title{plot_partial_factor}
 \usage{
-plot_partial_factor(mfa, ...)
+plot_partial_factor(mfa, dims = 1:2, title = "Partial Factor Scores")
 }
 \arguments{
 \item{mfa}{- the mfa object}
+
+\item{dims}{- Numeric vector of two values signifying dimensions to plot}
 
 \item{title}{- optional chart title}
 }

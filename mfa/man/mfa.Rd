@@ -26,7 +26,21 @@ corresponding to each block}
 \item{color}{- optional character vector for mapping a discrete color scale}
 }
 \value{
-an mfa object contaning the pieces of the resulting analysis
+an mfa object contaning the pieces of the resulting analysis:
+           lambda - the eigenvalues of the compromise
+           commonFactorScores - the common factor scores
+           partialFactorScores - the partial factor scores
+           Q - a matrix of the loadings
+           P - the compromise matrix
+       In addition, the object with have 8 attributes:
+               ncomps - number of components to return while printing 
+               ids - the sample ids
+               sets - the original list of groups
+               colWeights - the vector 'a' of column weights
+               rowWeights - the vector 'm' of row weights
+               var_names - the variable names
+               color - colors for plotting purposes
+               boot - a space for optional bootstrapped data
 }
 \description{
 Perform multiple factor analysis

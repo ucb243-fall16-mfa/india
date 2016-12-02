@@ -4,7 +4,7 @@
 \alias{contribution_var_dim}
 \title{contribution_var_dim}
 \usage{
-contribution_var_dim(mfa, ...)
+contribution_var_dim(mfa, l_max = 2)
 }
 \arguments{
 \item{mfa}{- the mfa object}

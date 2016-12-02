@@ -4,10 +4,12 @@
 \alias{plot_variable_loadings}
 \title{plot_variable_loadings}
 \usage{
-plot_variable_loadings(mfa, ...)
+plot_variable_loadings(mfa, dims = 1:2, title = "Variable Loadings")
 }
 \arguments{
 \item{mfa}{- the mfa object}
+
+\item{dims}{- Numeric vector of two values signifying dimensions to plot}
 
 \item{title}{- chart title}
 }

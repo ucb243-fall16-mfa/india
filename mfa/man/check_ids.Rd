@@ -7,7 +7,7 @@
 check_ids(ids)
 }
 \arguments{
-\item{ids}{- character vector}
+\item{ids}{- character/numeric vector}
 }
 \value{
 boolean - did the test pass?
