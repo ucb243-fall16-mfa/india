@@ -1,5 +1,6 @@
 function(input, output, session) {
   
+  
   # define the output plot depending on the selection of the mfa object and the 
   # type of plot chosen by the user.
     output$plot <- renderPlot({
