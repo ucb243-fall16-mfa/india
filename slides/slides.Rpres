@@ -1,3 +1,10 @@
+<style>
+  .footer {
+  position: fixed; 
+  top: 90%;
+  }
+</style>
+
 ========================================================
 autosize: false
 
@@ -5,7 +12,13 @@ autosize: false
     top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Multiple Factor Analysis in R</span>
 
 <span style="position: absolute; font-size: 25px;
-    top: 60%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Dario Cantore, Josiah Davis, Yanli Fan, Yoni Ackerman</span>
+    top: 60%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Dario Cantore</span>
+<span style="position: absolute; font-size: 25px;
+    top: 65%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Josiah Davis</span>
+<span style="position: absolute; font-size: 25px;
+    top: 70%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Yanli Fan</span>
+<span style="position: absolute; font-size: 25px;
+    top: 75%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Yoni Ackerman</span>
 
 Agenda
 ========================================================
@@ -22,7 +35,10 @@ The Algorithm
 ========================================================
 "an extension of principal component analysis tailored to handle multiple data tables that measure sets of variables collected on the same observations"
 
+<div style="font-size:80%; position: fixed; top: 90%;">
 <small>Source: WIREs Comput Stat 2013. doi: 10.1002/wics.1246</small>
+</div>
+
 
 The Algorithm
 ========================================================
@@ -34,38 +50,48 @@ The Algorithm
 4. Concatenate the tables together
 5. Compute a generalized singular value composition on the combined table
 
+<div style="font-size:80%; position: fixed; top: 90%;">
 <small>Source: WIREs Comput Stat 2013. doi: 10.1002/wics.1246</small>
+</div>
+
 
 1: Collect multiple tables of data related to the same items
 ========================================================
-![](slides-figure/step1.png)
+<img src="slides-figure/step1.png" alt="Smiley face" width="500"
+style="position: relative; left: 50%; margin-left:-250px; ">
 
 Data need not have the same number of variables for in each table, but all data should have the same number of observations/items.
 
 2: Calculate the singular values of each table
 ========================================================
-![](slides-figure/step2.png)
+<img src="slides-figure/step2.png" alt="Smiley face" width="400"
+style="position: relative; left: 50%; margin-left:-200px; ">
 
 Singular Value Decomposition is a method of factoring a rectangular matrix into three matrices that consolidate information about the variance in the data.
 
 3: Normalize and weight the data
 ========================================================
-![](slides-figure/step3.png)
+<img src="slides-figure/step3.png" alt="Smiley face" width="500"
+style="position: relative; left: 50%; margin-left:-250px; ">
+
 
 In this step, each table is divided its first singular value and each observation can also be weighted. (This can be thought of as analogous to scaling variables by their variance.)
 
 4: Concatenate the tables together
 ========================================================
-![](slides-figure/step4.png)
+<!-- ![](slides-figure/step4.png) -->
+<img src="slides-figure/step4.png" alt="Smiley face" width="400"
+style="position: relative; left: 50%; margin-left:-200px; ">
 
 At this point, all data points are contained in a single table and have been scaled.
 
 Step 5. Compute a generalized singular value composition on the combined table
 ========================================================
-![](slides-figure/step5.png)
+<!-- ![](slides-figure/step5.png) -->
+<img src="slides-figure/step5.png" alt="Smiley face" width="280"
+style="position: relative; left: 50%; margin-left:-140px; ">
 
-The Generalized Singular Value decomposition consists of taking the singular value composition of the previously normalized-weighted data. (See appendix for details). 
-
+The Generalized Singular Value decomposition consists of taking the singular value composition of the previously normalized-weighted data. (See appendix for details).
 
 The Output
 ========================================================
@@ -106,7 +132,8 @@ Sample questions:
 Similarities and Differences
 ========================================================
 
-![](slides-figure/compromise_scores.png) 
+<img src="slides-figure/compromise_scores.png" alt="Smiley face" width="400"
+style="position: relative; left: 50%; margin-left:-250px; ">
 
 <small>
 The Factor Scores reveal similarities and differences:
@@ -117,8 +144,8 @@ The Factor Scores reveal similarities and differences:
 
 Deviations from the Consensus
 ========================================================
-
-![](slides-figure/partial_factor_scores.png)
+<img src="slides-figure/partial_factor_scores.png" alt="Smiley face" height="300" width="700"
+style="position: relative; left: 50%; margin-left:-350px; ">
 
 <small>
 The Partial Factor Scores provide a deeper understanding how different wine experts deviated from the consensus:
@@ -151,7 +178,6 @@ Read our [vignette](https://github.com/fussballball/stat243FinalProject) for det
 
 Available Methods 
 ========================================================
-Here is a list of methods that the package currently supports.
 
 | Method  |  Description |
 |---|---|
@@ -164,6 +190,9 @@ Here is a list of methods that the package currently supports.
 |  `summary_eigenvalues()` |  Basic information about the eigenvalues  |
 |  `RV()` | Similarity between two tables  |
 |  `RV_table()` | Simularity between multiples tables  |
+|  `Lg()` | Lg coefficient between two numeric tables  |
+|  `Lg_table()` | A matrix of Lg scores for all the tables  |
+|  `boostrap()` | Boostrap approximation for the compromise scores  |
 
 ========================================================
 <span style="position: absolute; font-size: 70px;
@@ -176,14 +205,13 @@ The goal of Generalized Singular Value Decomposition (GSVD) is to conduct a  sin
 
 $$A = \tilde{U} \tilde{\Delta} \tilde{V}^\mathsf{T}$$
 
-Notation: 
 - $A$ is the data
 - $\tilde{U}$ and $\tilde{V}$ are left and right singular vectors of $A$
 - $\tilde{\Delta}$ is a diagonal matrix of singular values
 - $M$ is a diagonal matrix of observation weights
 - $W$ is a diagonal matrix of column weights
 
-Reference: [tutorial by Hervé Abdi](http://www.cimat.mx/~alram/met_num/clases/Abdi-SVD2007-pretty.pdf)
+<small>Reference: [tutorial by Hervé Abdi](http://www.cimat.mx/~alram/met_num/clases/Abdi-SVD2007-pretty.pdf)</small>
 
 
 Appendix: GSVD (Continued)
