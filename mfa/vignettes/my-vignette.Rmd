@@ -8,23 +8,27 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+```{r}
+library(mfa)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 6, fig.align = "center")
+```
+
 The mfa package can be used to perform Multiple Factor Analysis (MFA, also called multiple factorial analysis) on a given dataset or matrix. The centerpiece of the package is the mfa function, which performs multiple factor analysis on the given data. 
 Multiple factor analysis consists of 2 steps: In step one, the dataset is split up into several smaller sets, on each of which a principal component analysis is done. These tables are then normalized, each by its first singular value. In the second step the smaller datatables are concatenated to one big table that is again analyzed using principal component analysis. Through this analysis we obtain, amongst others, factor scores and variable loadings. A thorough description of this can be found in WIREs Comput Stat 2013. doi: 10.1002/wics.1246.
 
 #Installing the package
 To install the package download the Github repository.
 Open R Studio and setwd to the root folder (the folder that contains the Github repository). Execute the following code to install the package and its vignette.
-```{r}
-#library(devtools)
-#install("mfa")
-#library(mfa)
-
-##after loading the library, change the working directory to the directory
-##of the package. In most cases the following line should suffice:
-#setwd("./mfa/")
-##execute the following line to knit the vignette
-#devtools::build_vignettes()
-
+```{r, eval=FALSE}
+library(devtools)
+install("mfa")
+library(mfa)
+#after loading the library, change the working directory to the directory
+#of the package. In most cases the following line should suffice:
+setwd("./mfa/")
+#execute the following line to knit the vignette
+devtools::build_vignettes() # Note: I don't think they should have to build the vignette or change their working directory 
 ```
 
 
@@ -46,12 +50,13 @@ The wine data is described in https://www.utdallas.edu/~herve/abdi-WiresCS-mfa-2
 
 
 ```{r}
+setwd('/Users/josiahdavis/Documents/LearningDataScience/Berkeley/STAT243/stat243FinalProject')
 library(mfa)
-data <- read.csv("https://raw.githubusercontent.com/ucb-stat243/stat243-fall-2016/master/problem-sets/final-project/data/wines.csv")
+wine <- read.csv('../project/wines.csv')
 SETS <- list(c(1:6),c(7:12), c(13:18),c(19:23),c(24:29),c(30:34),c(35:38),c(39:44),c(45:49),c(50:53))
 
 #remove the first row because it contains non-numerical values
-data <- data[,-1]
+data <- wine[,-1]
 mfa1 <- mfa(data = data, sets = SETS )
 
 mfa1
@@ -70,6 +75,7 @@ The print.mfa function takes an mfa object as an input and returns a basic summa
 The plot function for mfa objects automatically plots the Compromise, Partial Factor Scores and Variable Loadings, using the plot_compromise, plot_partial_factor and plot_variable_loadings functions. It can take a color argument as input, which should be a list of vectors. Each element of the vector denotes observations (e.g. rows) of the data table which will then be displayed in the same color.
 
 ```{r}
+par(mar = rep(1, 4))
 plot(mfa1)
 ```
 
@@ -86,13 +92,14 @@ plot_compromise(mfa1)
 The plot_partial_factor Function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.
 
 ```{r}
+par(mar = rep(1, 4))
 plot_partial_factor(mfa1)
 ```
 
 #plot_variable_loadings Function
 The plot_variable_loadings Function for mfa objects plots the variable loadings for each...
 ```{r}
-plot_variable_loadings(mfa1)
+# plot_variable_loadings(mfa1)
 ```
 
 
@@ -143,8 +150,8 @@ contribution_table_dim(mfa = mfa1, l_max = 4)
 #RV Function
 The RV function takes as input two tables and returns a single value, called the Escoufier's RV Coefficient.
 The RV function analyzes the structure between two tables. It can be seen as the multivariate generalization of the squared Pearson Correlation Coefficient.
-Given two tables as an input it returns the scalar RV.    
-RV = $\frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\sqrt(trace(table1 \ table1^T) * (table1 \ table1^T) * trace((table2 \ table2^T) * (table2 \ table2^T)))}$ where the Root is taken with respect to the entire denominator and $*$ as well as " " denote the normal Matrix Multiplication.
+Given two tables as an input it returns the scalar $R_V$.    
+$R_{Vk,k'}=\frac{trace(X_{[k]} X_{[k]}^T) * trace(X_{[k']} X_{[k']}^T)}{\sqrt(trace[(X_{[k]} X_{[k]}^T) * (X_{[k]} X_{[k]}^T)] * trace[(X_{[k']} X_{[k']}^T) * (X_{[k']} X_{[k']}^T)])}$ where the Root is taken with respect to the entire denominator and $*$ as well as " " denote the normal Matrix Multiplication.
 
 ```{r}
 RV(data[,SETS[[1]]], data[,SETS[[2]]])
@@ -164,7 +171,7 @@ RV_table(mfa = mfa1, SETS[1:4])
 The Lg function takes as input two tables and returns a single value, called $L_g$ coefficient. The $L_g$ coefficient measures the richness of the common structure between the two tables: the larger the $L_g$ coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).
 
 It is calculated the following way:
-$L_g = \frac{trace(table1 \ table1^T) * trace(table2 \ table2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$ 
+$L_g = \frac{trace(X_1 X_1^T)  trace(X_2 X_2^T)}{\gamma_{11}^2 * \gamma_{12}^2}$ 
 where the notation is the same as for the RV function and $\gamma_{1k}$ denotes the first singular value of table k. 
 
 ```{r}
