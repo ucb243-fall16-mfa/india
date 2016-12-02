@@ -16,10 +16,10 @@ plot_variable_loadings <- function(mfa, dims = 1:2, title = 'Variable Loadings')
   # Set plotting parameters
   tables <- length(mfa$partialFactorScores)
   cols <- 5 # Number of columns in the grid
-  rows <- tables / cols # Number of rows in the grid
-  par(mfrow = c(rows, cols), mar = c(1, 1, 1, 1))
-      # , oma = c(4, 2, 4, 2) # Outer margin (b, r, u, l)
-      # , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
+  rows <- ceiling(tables / cols) # Number of rows in the grid
+  par(mfrow = c(rows, cols)
+      , oma = c(4, 2, 4, 2) # Outer margin (b, r, u, l)
+      , mar = c(2, 2, 2, 2) ) # Inner margins (b, r, u, l)
   
   # Min and max plotting dimensions
   x_range <- c(min(mfa$Q[,dims[1]]), max(mfa$Q[,dims[1]]))
