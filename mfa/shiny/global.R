@@ -1,5 +1,3 @@
-## install the package from github. If installed locally, sometimes 
-## there would be error using some functions.
 
 library(shiny)
 library(mfa)
