@@ -10,7 +10,21 @@
 #' @param scale - logical value: should the data be scaled?
 #' @param ids - optional character vector of row names
 #' @param color - optional character vector for mapping a discrete color scale
-#' @return an mfa object contaning the pieces of the resulting analysis
+#' @return an mfa object contaning the pieces of the resulting analysis:
+#'            lambda - the eigenvalues of the compromise
+#'            commonFactorScores - the common factor scores
+#'            partialFactorScores - the partial factor scores
+#'            Q - a matrix of the loadings
+#'            P - the compromise matrix
+#'        In addition, the object with have 8 attributes:
+#'                ncomps - number of components to return while printing 
+#'                ids - the sample ids
+#'                sets - the original list of groups
+#'                colWeights - the vector 'a' of column weights
+#'                rowWeights - the vector 'm' of row weights
+#'                var_names - the variable names
+#'                color - colors for plotting purposes
+#'                boot - a space for optional bootstrapped data
 #' @export
 mfa <- function(data, sets, ncomps = 2, weights = NULL,
                 center = TRUE, scale = TRUE, ids = NULL
@@ -27,12 +41,12 @@ mfa <- function(data, sets, ncomps = 2, weights = NULL,
       var_names <- lapply(sets, function(k){
         gsub('\\.[0-9]+', '', k) # This removes any numbers from duplicate names
       })
-    }else if (is.data.frame(data) | !is.null(colnames(data))){
+    } else if (is.data.frame(data) | !is.null(colnames(data))){
       # get the variable names from the data if it has column names
       var_names <- lapply(sets, function(k){
         gsub('\\.[0-9]+', '', colnames(data)[k])
       })
-    }else{
+    } else {
       var_names <- NULL
     }
     
@@ -94,5 +108,6 @@ mfa <- function(data, sets, ncomps = 2, weights = NULL,
     attr(ret, "rowWeights") <- weights
     attr(ret, "var_names") <- var_names
     attr(ret, "color") <- color
+    attr(ret, "boot") <- NA
     ret
 }
