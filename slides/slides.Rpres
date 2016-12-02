@@ -1,14 +1,3 @@
-<style>
-.bumper {
-  position: absolute; 
-  font-size: 60px;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-}
-</style>
-
 ========================================================
 autosize: false
 
@@ -41,8 +30,8 @@ The Algorithm
 
 1. Collect multiple tables of data related to the same items
 2. Calculate the singular values of each table
-3. Concatenate the tables together
-4. Normalize and weight the data
+3. Normalize and weight the data
+4. Concatenate the tables together
 5. Compute a generalized singular value composition on the combined table
 
 <small>Source: WIREs Comput Stat 2013. doi: 10.1002/wics.1246</small>
@@ -59,17 +48,17 @@ Data need not have the same number of variables for in each table, but all data 
 
 Singular Value Decomposition is a method of factoring a rectangular matrix into three matrices that consolidate information about the variance in the data.
 
-3: Concatenate the tables together
-========================================================
-![](slides-figure/step4.png)
-
-At this point, all data points are contained in a single table but have not yet been scaled.
-
-4: Normalize and weight the data
+3: Normalize and weight the data
 ========================================================
 ![](slides-figure/step3.png)
 
 In this step, each table is divided its first singular value and each observation can also be weighted. (This can be thought of as analogous to scaling variables by their variance.)
+
+4: Concatenate the tables together
+========================================================
+![](slides-figure/step4.png)
+
+At this point, all data points are contained in a single table and have been scaled.
 
 Step 5. Compute a generalized singular value composition on the combined table
 ========================================================
