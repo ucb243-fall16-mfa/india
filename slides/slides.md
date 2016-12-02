@@ -1,8 +1,22 @@
-Multiple Factor Analysis in R
+<style>
+.bumper {
+  position: absolute; 
+  font-size: 60px;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+</style>
+
 ========================================================
-author: Dario Cantore, Josiah Davis, Yanli Fan, Yoni Ackerman
-date: 12/2/2016
-autosize: true
+autosize: false
+
+<span style="position: absolute; font-size: 60px;
+    top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Multiple Factor Analysis in R</span>
+
+<span style="position: absolute; font-size: 25px;
+    top: 60%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Dario Cantore, Josiah Davis, Yanli Fan, Yoni Ackerman</span>
 
 Agenda
 ========================================================
@@ -11,26 +25,27 @@ Agenda
 3. Our Package
 4. Appendix: GSVD
 
+========================================================
+<span style="position: absolute; font-size: 60px;
+    top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">The Algorithm</span>
+
 The Algorithm
 ========================================================
+"an extension of principal component analysis tailored to handle multiple data tables that measure sets of variables collected on the same observations"
 
-In a nutshell
+<small>Source: WIREs Comput Stat 2013. doi: 10.1002/wics.1246</small>
+
+The Algorithm
 ========================================================
+"an extension of principal component analysis tailored to handle multiple data tables that measure sets of variables collected on the same observations"
 
-Multiple factor analysis... is an extension of principal component analysis tailored to handle multiple data tables that measure sets of variables collected on the same observations^1
-
-What is the Multiple Factor Analysis Algorithm?
-========================================================
-
-What is the Multiple Factor Analysis Algorithm?
-========================================================
 1. Collect multiple tables of data related to the same items
 2. Calculate the singular values of each table
-3. Concatenate the data tables together
+3. Concatenate the tables together
 4. Normalize and weight the data
 5. Compute a generalized singular value composition on the combined table
 
-_Note:_ k refers to the number of tables, i refers to the number of observations, and j refers to the number of variables.
+<small>Source: WIREs Comput Stat 2013. doi: 10.1002/wics.1246</small>
 
 1: Collect multiple tables of data related to the same items
 ========================================================
@@ -74,9 +89,10 @@ There are three major types of information to analyze:
 | Contributions | Most important elements: variables, observations, and tables |
 | Coefficients | Similarity between the tables |
 
-Case Study
-========================================================
 
+========================================================
+<span style="position: absolute; font-size: 70px;
+    top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Case Study</span>
 
 
 Wine Tasting
@@ -103,27 +119,32 @@ Similarities and Differences
 
 ![](slides-figure/compromise_scores.png) 
 
+<small>
 The Factor Scores reveal similarities and differences:
 - New Zealand wines are very different from French wines
 - French wines 1 and 2 are very similar to each other
 - There is greater variety in the Calfornia wines than French or New Zealand wines
-
+</small>
 
 Deviations from the Consensus
 ========================================================
 
 ![](slides-figure/partial_factor_scores.png)
 
+<small>
 The Partial Factor Scores provide a deeper understanding how different wine experts deviated from the consensus:
-- Some wine assessors (e.g., 4) thought wines from California were more similar than the rest of the group
-- A few experts (e.g., 7) noticed less regional distinctions between wines from California and New Zealand
+  - Some wine assessors (e.g., 4) thought wines from California were more similar than the rest of the group
+  - A few experts (e.g., 7) noticed less regional distinctions between wines from California and New Zealand
+</small>
+
+========================================================
+<span style="position: absolute; font-size: 70px;
+    top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Our Package</span>
+
 
 Our Package
 ========================================================
 
-
-Our Package
-========================================================
 To get started, install the mfa package from github, and call mfa with your dataset and a list of variables.
 
 
@@ -138,7 +159,6 @@ Calling the plot function will give you summary charts to interpret your data.
 ```r
 plot(mfa1)
 ```
-
 
 Read our [vignette](https://github.com/fussballball/stat243FinalProject) for detailed tutorials
 
@@ -157,6 +177,11 @@ Here is a list of methods that the package currently supports.
 |  `summary_eigenvalues()` |  Basic information about the eigenvalues  |
 |  `RV()` | Similarity between two tables  |
 |  `RV_table()` | Simularity between multiples tables  |
+
+========================================================
+<span style="position: absolute; font-size: 70px;
+    top: 50%;left: 50%; margin-right: -50%; transform: translate(-50%, -50%) ">Appendix: GSVD</span>
+
 
 Appendix: GSVD
 ========================================================
@@ -190,8 +215,3 @@ $$\tilde{A} = P\Delta Q^\mathsf{T}$$
 The third step is to calculate $\tilde{U}$, $\tilde{\Delta}$, $\tilde{V}$
 
 $$\tilde{U}=M^{-1/2}P, \tilde{V}=W^{-1/2}Q, \tilde{\Delta}=\Delta$$
-
-References
-========================================================
-
-1. WIREs Comput Stat 2013. doi: 10.1002/wics.1246
