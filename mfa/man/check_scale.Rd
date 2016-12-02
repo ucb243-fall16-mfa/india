@@ -7,7 +7,7 @@
 check_scale(scale)
 }
 \arguments{
-\item{scale}{boolean}
+\item{scale}{boolean or numeric vector}
 }
 \value{
 boolean - does the check pass?

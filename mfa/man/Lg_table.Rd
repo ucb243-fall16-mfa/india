@@ -4,7 +4,7 @@
 \alias{Lg_table}
 \title{Lg_table}
 \usage{
-Lg_table(mfa, sets)
+Lg_table(mfa, sets = NULL)
 }
 \arguments{
 \item{mfa}{- the mfa object containing the data}

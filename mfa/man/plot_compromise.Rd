@@ -4,10 +4,12 @@
 \alias{plot_compromise}
 \title{plot_compromise}
 \usage{
-plot_compromise(mfa, ...)
+plot_compromise(mfa, dims = 1:2, title = "Common Factor Scores")
 }
 \arguments{
 \item{mfa}{- the mfa object}
+
+\item{dims}{- Numeric vector of two values signifying dimensions to plot}
 
 \item{title}{- chart title}
 }

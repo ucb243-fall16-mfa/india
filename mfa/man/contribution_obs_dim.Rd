@@ -4,7 +4,7 @@
 \alias{contribution_obs_dim}
 \title{contribution_obs_dim}
 \usage{
-contribution_obs_dim(mfa, ...)
+contribution_obs_dim(mfa, l_max = 2)
 }
 \arguments{
 \item{mfa}{- the mfa object}

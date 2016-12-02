@@ -4,7 +4,7 @@
 \alias{contribution_table_dim}
 \title{contribution_table_dim}
 \usage{
-contribution_table_dim(mfa, ...)
+contribution_table_dim(mfa, l_max = 2)
 }
 \arguments{
 \item{mfa}{- the mfa object}

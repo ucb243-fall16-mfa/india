@@ -14,6 +14,8 @@ check_data(data, sets, ncomps, weights, ids)
 \item{ncomps}{- integer number of components to use}
 
 \item{weights}{- numeric vector of weights}
+
+\item{ids}{- character/numeric vector of sample id's}
 }
 \value{
 boolean - TRUE if test passes
