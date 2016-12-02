@@ -172,6 +172,15 @@ Lg_table(mfa = mfa1, SETS[1:4])
 
 ```
 
+#  `bootstrap`
+The bootstrap function takes an mfa object, a positive integer B and the seed number as an optional input. It is used to estimate the stability of the compromise factor scores. It returns the input mfa object with a new attribute which consists of the bootstrap samples for the compromise factor scores. 
+
+```{r}
+mfa2 <- bootstrap(mfa1,  B = 1000, seed = 12)
+mfa2
+```
+
+
 
 
 
