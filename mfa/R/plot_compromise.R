@@ -59,7 +59,7 @@ plot_compromise <- function(mfa, dims = 1:2, title = 'Common Factor Scores'){
   }
   
   abline(v = 0, h = 0)
-  mtext(title, cex = 1.5)
+  mtext(title, outer = TRUE, cex = 1.5)
 }
 
 # plot_compromise(mfa1)
