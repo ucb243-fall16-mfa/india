@@ -27,7 +27,7 @@ devtools::install_github("fussballball/stat243FinalProject/mfa",
 ```
 
 
-#mfa Function
+# `mfa()`
 The mfa function takes data, sets, ncomps, center and scale as parameters. It returns an object of class mfa.
 
 The data parameter must either be a data.frame or matrix and contains all the data which will be analyzed through the multiple factor analysis.  
@@ -52,11 +52,10 @@ mfa1
 ```
 
 #Generic Methods
-#print.mfa Function
+# `print.mfa()`
 The print.mfa function takes an mfa object as an input and returns a basic summary of it. This summary consists of the name of the object, the number of smaller tables which make up the entire dataset (i.e. the number of experts rating the wines), the eigenvalues of the mfa object, as well as the variance explained by the first 2 eigenvalues. Also given are the first 2 factor scores.
 
-
-#plot.mfa Function
+# `plot.mfa()`
 The plot function for mfa objects automatically plots the Compromise, Partial Factor Scores and Variable Loadings, using the plot_compromise, plot_partial_factor and plot_variable_loadings functions. It can take a color argument as input, which should be a list of vectors. Each element of the vector denotes observations (e.g. rows) of the data table which will then be displayed in the same color.
 
 ```{r}
@@ -65,24 +64,24 @@ plot(mfa1)
 ```
 
 
-#plot_compromise Function
-The plot_compromise Function for mfa objects plots the factor scores (factor scores and compromise are used interchangeably here) of the object.
+# `plot_compromise()`
+The plot_compromise function for mfa objects plots the factor scores (factor scores and compromise are used interchangeably here) of the object.
 
 ```{r}
 plot_compromise(mfa1)
 
 ```
 
-#plot_partial_factor Function
-The plot_partial_factor Function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.
+# `plot_partial_factor()`
+The plot_partial_factor function for mfa objects plots the partial factor scores for each table. This means that there will be k, the number of smaller datatables, or the length of the sets list given as input for the mfa function, plots. The user can specify which of the k plots should be displayed by setting the sets argument to a vector in the function call. By default all k plots are displayed.
 
 ```{r}
 par(mar = rep(1, 4))
 plot_partial_factor(mfa1)
 ```
 
-#plot_variable_loadings Function
-The plot_variable_loadings Function for mfa objects plots the variable loadings for each variable.
+# `plot_variable_loadings()`
+The plot_variable_loadings function for mfa objects plots the variable loadings for each variable.
 ```{r}
 # plot_variable_loadings(mfa1)
 ```
@@ -92,14 +91,14 @@ The plot_variable_loadings Function for mfa objects plots the variable loadings 
 
 #Related Methods and Functions
 
-#summary_eigenvalues Function
-The summary_eigenvalues Function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained. 
+# `summary_eigenvalues()`
+The summary_eigenvalues function takes an mfa object as an input and returns a summary of its eigenvalues. This summary consists of the singular values, the eigenvalues, the cumulative sum of the eigenvalues, the % of inertia explained, and the cumulative % of inertia explained. 
 ```{r}
 summary_eigenvalues(mfa1)
 ```
 
 
-#contribution_obs_dim Function (Contribution of an Observation to a Dimension)
+# `contribution_obs_dim()` (Contribution of an Observation to a Dimension)
 The contribution_obs_dim function also operates on an mfa object, it returns the contribution of an observation o on a dimension d. It takes as an input an mfa object, and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is the contribution of observation i onto dimension l.
 
 $ctr_{i,l} = \frac{m_i * f_{i,l}^2}{\lambda_l^2}$, where $\lambda_l$ is the eigenvalue of dimension $l$, $m_i$ is the mass of the $i$-th dimension and $f_{i,l}$ is the factor score for the $i$-th observation for the $l$-th dimension.
@@ -111,7 +110,7 @@ contribution_obs_dim(mfa = mfa1, l_max = 3)
 ```
 
 
-#contribution_var_dim Function(Contribution of a Variable to a Dimension)
+# `contribution_var_dim()`(Contribution of a Variable to a Dimension)
 The contribution_var_dim function operates on an mfa object, it returns the contribution of a variable j on a dimension l.  It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry j,l is:
 
 $ctr_{j,l} = a_j * q_{j,l}$ where $a_j$ is the $\alpha$ weight of the first variable (the inverse of the first singular value of the table from Step 1 of the mfa function), and $q_{j,l}$ is the loading of the $j$th variable for the $l$th dimension.
@@ -121,7 +120,7 @@ contribution_var_dim(mfa = mfa1, l_max = 2)
 ```
 
 
-#contribution_table_dim Function(Contribution of a Table to a Dimension)
+# `contribution_table_dim()`(Contribution of a Table to a Dimension)
 The contribution_table_dim function operates on an mfa Object, it returns the contribution of a Table $k$ on a Dimension $l$. It takes as input an object of class mfa and the number of dimensions that will be returned. It returns a matrix of these dimensions where each entry is: 
  
 $ctr_{kl} = \sum_i^{J_k} ctr_{jl}$ where $ctr_{jl}$ is the contribution of a variable $j$ to a dimension $l$ and the sum goes over all variables in Table $k$. The contributions of a table $k$ to a dimension $l$ is therefore just the sum of the contributions of the variables comprising the table to the dimension $l$.
@@ -132,7 +131,7 @@ contribution_table_dim(mfa = mfa1, l_max = 4)
 
 
 #Escoufier's RV Coefficient
-#RV Function
+# `RV()`
 The RV function takes as input two tables and returns a single value, called the Escoufier's RV Coefficient.
 The RV function analyzes the structure between two tables. It can be seen as the multivariate generalization of the squared Pearson Correlation Coefficient.
 Given two tables as an input it returns the scalar $R_V$.    
@@ -143,7 +142,7 @@ RV(data[,SETS[[1]]], data[,SETS[[2]]])
 ```
 
 
-#RV_Table Function
+# `RV_Table()`
 
 The RV Table function returns a matrix of RV Coefficients. 
 The RV Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the RV coefficients will be calculated. The pairwise RV Coefficient calculation is the same as for the RV function. The output is a matrix M, where $M_{ij}$ is the RV coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
@@ -152,7 +151,7 @@ The RV Table function takes as input an mfa object and a list which consists of 
 RV_table(mfa = mfa1, SETS[1:4])
 ```
 
-#Lg Function
+# `Lg()`
 The Lg function takes as input two tables and returns a single value, called $L_g$ coefficient. The $L_g$ coefficient measures the richness of the common structure between the two tables: the larger the $L_g$ coefficient, the larger the common structure (Analyzing Sensory Data with R, Sebastian Le, p.290).
 
 It is calculated the following way:
@@ -163,7 +162,7 @@ where the notation is the same as for the RV function and $\gamma_{1k}$ denotes 
 Lg(data[,SETS[[1]]], data[,SETS[[2]]])
 ```
 
-#Lg_table Function
+# `Lg_table()`
 The Lg_table function is related to the Lg function in exactly the same way as the RV_table function is related to the RV function.  
 The Lg Table function returns a matrix of Lg Coefficients. 
 The Lg Table function takes as input an mfa object and a list which consists of vectors. These vectors denote the column indizes out of which tables will be created, between these tables the Lg coefficients will be calculated. The pairwise Lg Coefficient calculation is the same as for the Lg function. The output is a matrix M, where $M_{ij}$ is the Lg coefficient between Table $i$ and Table $j$. Table $i$ is created by taking the $i$-th element of the set vector and extracting the corresponding columns out of the dataset / matrix given.
