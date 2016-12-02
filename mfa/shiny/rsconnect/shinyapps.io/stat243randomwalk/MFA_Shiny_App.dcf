@@ -2,8 +2,8 @@ name: MFA_Shiny_App
 account: stat243randomwalk
 server: shinyapps.io
 appId: 141361
-bundleId: 632636
+bundleId: 633748
 url: https://mfashinyapp.shinyapps.io/MFA_Shiny_App/
-when: 1480645979.67128
+when: 1480702409.77849
 asMultiple: FALSE
 asStatic: FALSE
