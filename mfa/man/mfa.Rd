@@ -15,7 +15,7 @@ corresponding to each block}
 
 \item{ncomps}{- number of components to report}
 
-\item{weights}{-}
+\item{weights}{- a numeric vector of same length as number of rows in data}
 
 \item{center}{- logical value: should the data should be centered?}
 
@@ -44,5 +44,13 @@ an mfa object contaning the pieces of the resulting analysis:
 }
 \description{
 Perform multiple factor analysis
+}
+\examples{
+data(wine)                                    
+i <- grep("V", colnames(wine))                
+data <- wine[,i]                              
+sets <- list(1:6, 7:12, 13:18, 19:23, 24:29,  
+            30:34, 35:38, 39:44, 45:49, 50:53)
+MFA <- mfa(data, sets)    
 }
 
